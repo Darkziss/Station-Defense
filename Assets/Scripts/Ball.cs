@@ -7,7 +7,7 @@ namespace StationDefense
     {
         [SerializeField] private Mover _mover;
 
-        [SerializeField] private LayerMask barrierLayer;
+        [SerializeField] private int barrierLayer;
 
         private void OnValidate()
         {
@@ -18,7 +18,7 @@ namespace StationDefense
         {
             int collisionLayer = collision.gameObject.layer;
 
-            if (barrierLayer.value == collisionLayer)
+            if (collisionLayer == barrierLayer)
                 Destroy(gameObject);
         }
     }

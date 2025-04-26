@@ -69,6 +69,13 @@ namespace StationDefense
         {
             _isTurnStarted = false;
 
+            _currentCannonIndex = minCannonIndex;
+
+            float cameraZPosition = _camera.transform.position.z;
+            Vector3 cameraEndPosition = new(0f, 0f, cameraZPosition);
+
+            Tween.Position(_camera.transform, cameraEndPosition, _cameraTweenSettings);
+
             Debug.Log($"Ended Turn: {_currentTurn}");
         }
 

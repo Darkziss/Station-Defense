@@ -20,8 +20,6 @@ namespace StationDefense
         {
             int collisionLayer = collision.gameObject.layer;
 
-            Debug.Log($"Ball collision: {collisionLayer}");
-
             if (collisionLayer == _barrierLayer || collisionLayer == _enemyLayer)
                 Destroy(gameObject);
         }

@@ -23,14 +23,12 @@ namespace StationDefense
                 _mover = GetComponent<TargetMover>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             Color color = _spriteRenderer.color;
             color.a = 1f;
 
             _spriteRenderer.color = color;
-            
-            Activate();
         }
 
         public void Activate()
@@ -38,22 +36,15 @@ namespace StationDefense
             _mover.StartMoving();
         }
 
-        public void Deactivate()
-        {
-            _mover.StopMoving();
-        }
-
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            Debug.Log($"Collision. Layer: {collision.gameObject.layer}");
-            
-            if (collision.gameObject.layer == _ballLayer)
-            {
-                Deactivate();
+            if (collision.gameObject.layer != _ballLayer)
+                return;
 
-                Tween.Alpha(_spriteRenderer, 0f, fadeDuration)
-                    .OnComplete(() => gameObject.SetActive(false));
-            }
+            _mover.StopMoving();
+
+            Tween.Alpha(_spriteRenderer, 0f, fadeDuration)
+                .OnComplete(() => gameObject.SetActive(false));
         }
     }
 }

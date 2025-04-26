@@ -1,4 +1,5 @@
 using UnityEngine;
+using Pooling;
 using PrimeTween;
 
 namespace StationDefense
@@ -49,7 +50,9 @@ namespace StationDefense
         {
             Deactivate();
 
-            Mover ballMover = Instantiate(_ballPrefab, _firePointTransform.position, Quaternion.identity);
+            //Mover ballMover = Instantiate(_ballPrefab, _firePointTransform.position, Quaternion.identity);
+            Mover ballMover = PoolStorage.GetFromPool(nameof(Ball), _ballPrefab, _firePointTransform.position,
+                Quaternion.identity);
 
             ballMover.SetMoveDirection(_transform.up);
             ballMover.StartMoving();

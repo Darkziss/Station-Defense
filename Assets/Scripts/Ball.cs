@@ -1,4 +1,5 @@
 using UnityEngine;
+using Pooling;
 
 namespace StationDefense
 {
@@ -21,7 +22,7 @@ namespace StationDefense
             int collisionLayer = collision.gameObject.layer;
 
             if (collisionLayer == _barrierLayer || collisionLayer == _enemyLayer)
-                Destroy(gameObject);
+                PoolStorage.PutToPool(nameof(Ball), this);
         }
     }
 }

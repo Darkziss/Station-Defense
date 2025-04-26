@@ -1,4 +1,5 @@
 using UnityEngine;
+using Pooling;
 using PrimeTween;
 
 namespace StationDefense
@@ -7,6 +8,7 @@ namespace StationDefense
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private BoxCollider2D _boxCollider;
         
         [SerializeField] private TargetMover _mover;
 
@@ -19,6 +21,9 @@ namespace StationDefense
             if (_spriteRenderer == null)
                 _spriteRenderer = GetComponent<SpriteRenderer>();
 
+            if (_boxCollider == null)
+                _boxCollider = GetComponent<BoxCollider2D>();
+
             if (_mover == null)
                 _mover = GetComponent<TargetMover>();
         }
@@ -29,6 +34,8 @@ namespace StationDefense
             color.a = 1f;
 
             _spriteRenderer.color = color;
+
+            _boxCollider.enabled = true;
         }
 
         public void Activate()
@@ -41,10 +48,12 @@ namespace StationDefense
             if (collision.gameObject.layer != _ballLayer)
                 return;
 
+            _boxCollider.enabled = false;
+
             _mover.StopMoving();
 
             Tween.Alpha(_spriteRenderer, 0f, fadeDuration)
-                .OnComplete(() => gameObject.SetActive(false));
+                .OnComplete(() => PoolStorage.PutToPool(nameof(Enemy), this));
         }
     }
 }

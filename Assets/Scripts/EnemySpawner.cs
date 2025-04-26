@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Pooling;
 
 namespace StationDefense
 {
@@ -61,7 +62,8 @@ namespace StationDefense
                     position.y = Random.Range(minY, maxY);
                 }
 
-                Enemy enemy = Instantiate(_enemyPrefab, position, Quaternion.identity);
+                Enemy enemy = PoolStorage.GetFromPool(nameof(Enemy), _enemyPrefab, position,
+                    Quaternion.identity);
                 enemy.Activate();
             }
         }

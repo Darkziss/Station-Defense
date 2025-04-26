@@ -1,5 +1,6 @@
-using PrimeTween;
 using UnityEngine;
+using Pooling;
+using PrimeTween;
 
 namespace StationDefense
 {
@@ -12,6 +13,8 @@ namespace StationDefense
         private void Awake()
         {
             Application.targetFrameRate = _targetFrameRate;
+
+            PoolStorage.Init();
 
             PrimeTweenConfig.SetTweensCapacity(_tweenCapacity);
         }

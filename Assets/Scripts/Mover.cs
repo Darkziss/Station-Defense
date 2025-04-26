@@ -8,14 +8,20 @@ namespace StationDefense
 
         [SerializeField] private bool _isMoving = false;
 
-        [SerializeField] private float _moveSpeed = 3f;
+        [SerializeField] private float _moveSpeed = 1f;
         [SerializeField] private Vector3 _moveDirection;
+
+        public Vector3 MoveDirection
+        {
+            get => _moveDirection;
+            set => _moveDirection = value.normalized;
+        }
 
         public bool IsMoving => _isMoving;
 
         private void OnValidate()
         {
-            _transform = transform;
+            if (_transform == null) _transform = transform;
 
             _moveDirection = _moveDirection.normalized;
         }
@@ -44,11 +50,6 @@ namespace StationDefense
                 return;
 
             _isMoving = false;
-        }
-
-        public void SetMoveDirection(Vector3 direction)
-        {
-            _moveDirection = direction;
         }
     }
 }

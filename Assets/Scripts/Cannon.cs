@@ -2,17 +2,23 @@ using UnityEngine;
 
 namespace StationDefense
 {
+    [RequireComponent(typeof(Rotator))]
     public class Cannon : MonoBehaviour
     {
+        [SerializeField] private Rotator _rotator;
+
+        [SerializeField] private Transform _transform;
         [SerializeField] private Transform _firePointTransform;
 
-        [SerializeField] private GameObject ballPrefab;
+        [SerializeField] private Mover ballPrefab;
 
         private const int mouseButtonKey = 0;
 
         private void OnValidate()
         {
-            _firePointTransform = GetComponentInChildren<Transform>();
+            if (_rotator == null) _rotator = GetComponent<Rotator>();
+
+            if (_transform == null) _transform = transform;
         }
 
         private void Update()
@@ -21,7 +27,12 @@ namespace StationDefense
 
             if (mouseInput)
             {
-                Instantiate(ballPrefab, _firePointTransform.position, Quaternion.identity);
+                _rotator.StopRotating();
+                
+                Mover ballMover = Instantiate(ballPrefab, _firePointTransform.position, Quaternion.identity);
+
+                ballMover.MoveDirection = _transform.up;
+                ballMover.StartMoving();
             }
         }
     }

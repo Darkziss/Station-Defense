@@ -22,8 +22,11 @@ namespace StationDefense
 
         private void OnValidate()
         {
-            if (_rotator == null) _rotator = GetComponent<Rotator>();
-            if (_transform == null) _transform = transform;
+            if (_rotator == null)
+                _rotator = GetComponent<Rotator>();
+
+            if (_transform == null)
+                _transform = transform;
         }
 
         public void Activate()
@@ -48,7 +51,7 @@ namespace StationDefense
 
             Mover ballMover = Instantiate(_ballPrefab, _firePointTransform.position, Quaternion.identity);
 
-            ballMover.MoveDirection = _transform.up;
+            ballMover.SetMoveDirection(_transform.up);
             ballMover.StartMoving();
         }
     }

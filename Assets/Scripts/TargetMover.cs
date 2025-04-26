@@ -2,23 +2,18 @@ using UnityEngine;
 
 namespace StationDefense
 {
-    public class Mover : MonoBehaviour
+    public class TargetMover : MonoBehaviour
     {
         [SerializeField] private Transform _transform;
 
         [SerializeField] private bool _isMoving = false;
 
-        [SerializeField, Min(0f)] private float _moveSpeed = 1f;
-        [SerializeField] private Vector3 _moveDirection;
-
-        public bool IsMoving => _isMoving;
+        [SerializeField, Min(0f)] private float moveSpeed = 1f;
 
         private void OnValidate()
         {
             if (_transform == null)
                 _transform = transform;
-
-            _moveDirection = _moveDirection.normalized;
         }
 
         private void Update()
@@ -26,12 +21,9 @@ namespace StationDefense
             if (!_isMoving)
                 return;
 
-            Vector3 translate = _moveSpeed * Time.deltaTime * _moveDirection;
-
-            _transform.Translate(translate);
+            _transform.position = Vector2.MoveTowards(_transform.position, Vector3.zero,
+                moveSpeed * Time.deltaTime);
         }
-
-        public void SetMoveDirection(Vector3 direction) => _moveDirection = direction.normalized;
 
         public void StartMoving()
         {

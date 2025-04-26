@@ -1,4 +1,5 @@
 using UnityEngine;
+using PrimeTween;
 
 namespace StationDefense
 {
@@ -8,32 +9,47 @@ namespace StationDefense
         [SerializeField] private Rotator _rotator;
 
         [SerializeField] private Transform _transform;
+
         [SerializeField] private Transform _firePointTransform;
+        [SerializeField] private SpriteRenderer _aimLineSpriteRenderer;
 
-        [SerializeField] private Mover ballPrefab;
+        [SerializeField] private Mover _ballPrefab;
 
-        private const int mouseButtonKey = 0;
+        private const float aimLineAlphaEnabled = 1f;
+        private const float aimLineAlphaDisabled = 0f;
+
+        private const float fadeDuration = 0.3f;
 
         private void OnValidate()
         {
             if (_rotator == null) _rotator = GetComponent<Rotator>();
-
             if (_transform == null) _transform = transform;
         }
 
-        private void Update()
+        public void Activate()
         {
-            bool mouseInput = Input.GetMouseButtonDown(mouseButtonKey);
+            _rotator.StartRotating();
 
-            if (mouseInput)
-            {
-                _rotator.StopRotating();
-                
-                Mover ballMover = Instantiate(ballPrefab, _firePointTransform.position, Quaternion.identity);
+            _aimLineSpriteRenderer.gameObject.SetActive(true);
+            Tween.Alpha(_aimLineSpriteRenderer, aimLineAlphaEnabled, fadeDuration);
+        }
 
-                ballMover.MoveDirection = _transform.up;
-                ballMover.StartMoving();
-            }
+        public void Deactivate()
+        {
+            _rotator.StopRotating();
+
+            Tween.Alpha(_aimLineSpriteRenderer, aimLineAlphaDisabled, fadeDuration)
+                .OnComplete(() => _aimLineSpriteRenderer.gameObject.SetActive(false));
+        }
+
+        public void Shoot()
+        {
+            Deactivate();
+
+            Mover ballMover = Instantiate(_ballPrefab, _firePointTransform.position, Quaternion.identity);
+
+            ballMover.MoveDirection = _transform.up;
+            ballMover.StartMoving();
         }
     }
 }

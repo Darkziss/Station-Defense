@@ -8,7 +8,7 @@ namespace StationDefense
 
         [SerializeField] private bool _isMoving = false;
 
-        [SerializeField] private float _moveSpeed = 1f;
+        [SerializeField, Min(0f)] private float _moveSpeed = 1f;
         [SerializeField] private Vector3 _moveDirection;
 
         public Vector3 MoveDirection

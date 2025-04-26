@@ -8,7 +8,7 @@ namespace StationDefense
 
         [SerializeField] private bool _isRotating = false;
 
-        [SerializeField] private float rotationSpeed = 1f;
+        [SerializeField] private float _rotationAngle = 1f;
 
         public bool IsRotating => _isRotating;
 
@@ -18,7 +18,7 @@ namespace StationDefense
                 return;
             
             Vector3 localRotation = _targetTransform.localRotation.eulerAngles;
-            localRotation.z += rotationSpeed * Time.deltaTime;
+            localRotation.z += _rotationAngle * Time.deltaTime;
 
             _targetTransform.localRotation = Quaternion.Euler(localRotation);
         }

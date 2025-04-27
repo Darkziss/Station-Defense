@@ -13,6 +13,7 @@ namespace StationDefense
         [SerializeField] private TargetMover _mover;
 
         [SerializeField] private int _ballLayer;
+        [SerializeField] private int _baseLayer;
 
         public ColorTeam Team { get; private set; }
 
@@ -51,14 +52,23 @@ namespace StationDefense
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer != _ballLayer)
-                return;
+            if (collision.gameObject.layer == _ballLayer)
+            {
+                Ball ball = collision.gameObject.GetComponent<Ball>();
 
-            Ball ball = collision.gameObject.GetComponent<Ball>();
+                if (ball.Team == Team)
+                {
+                    Disable();
+                    return;
+                }
+            }
 
-            if (ball.Team != Team)
-                return;
+            if (collision.gameObject.layer == _baseLayer)
+                Disable();
+        }
 
+        private void Disable()
+        {
             _boxCollider.enabled = false;
 
             _mover.StopMoving();

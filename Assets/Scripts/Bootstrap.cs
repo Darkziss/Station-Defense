@@ -10,6 +10,8 @@ namespace StationDefense
 
         [SerializeField] private int _tweenCapacity = 5;
 
+        [SerializeField] private Base _base;
+
         private void Awake()
         {
             Application.targetFrameRate = _targetFrameRate;
@@ -17,6 +19,8 @@ namespace StationDefense
             PoolStorage.Init();
 
             PrimeTweenConfig.SetTweensCapacity(_tweenCapacity);
+
+            _base.Init();
         }
     }
 }

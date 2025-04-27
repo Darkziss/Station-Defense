@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 8697786229375253760}
   _isMoving: 0
-  moveSpeed: 0.2
+  moveSpeed: 1
 --- !u!114 &7246735978007310398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,5 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 6738668549455112003}
+  _boxCollider: {fileID: 3327669093364158353}
   _mover: {fileID: 2543795949389000862}
   _ballLayer: 6
+  _baseLayer: 9

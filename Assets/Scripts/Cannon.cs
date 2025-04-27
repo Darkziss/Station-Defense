@@ -39,6 +39,8 @@ namespace StationDefense
             _rotator.StopRotating();
         }
 
+        public void InverseAngle() => _rotator.InverseAngle();
+
         public void Shoot()
         {
             Ball ball = PoolStorage.GetFromPool(nameof(Ball), _ballPrefab, _firePointTransform.position,

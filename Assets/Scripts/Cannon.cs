@@ -12,7 +12,6 @@ namespace StationDefense
         [SerializeField] private Transform _transform;
 
         [SerializeField] private Transform _firePointTransform;
-        [SerializeField] private SpriteRenderer _aimLineSpriteRenderer;
 
         [SerializeField] private Mover _ballPrefab;
 
@@ -33,24 +32,15 @@ namespace StationDefense
         public void Activate()
         {
             _rotator.StartRotating();
-
-            _aimLineSpriteRenderer.gameObject.SetActive(true);
-            Tween.Alpha(_aimLineSpriteRenderer, aimLineAlphaEnabled, fadeDuration);
         }
 
         public void Deactivate()
         {
             _rotator.StopRotating();
-
-            Tween.Alpha(_aimLineSpriteRenderer, aimLineAlphaDisabled, fadeDuration)
-                .OnComplete(() => _aimLineSpriteRenderer.gameObject.SetActive(false));
         }
 
         public void Shoot()
         {
-            Deactivate();
-
-            //Mover ballMover = Instantiate(_ballPrefab, _firePointTransform.position, Quaternion.identity);
             Mover ballMover = PoolStorage.GetFromPool(nameof(Ball), _ballPrefab, _firePointTransform.position,
                 Quaternion.identity);
 

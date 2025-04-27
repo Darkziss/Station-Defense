@@ -1,19 +1,19 @@
 using UnityEngine;
 using Pooling;
-using PrimeTween;
 
 namespace StationDefense
 {
     [RequireComponent(typeof(Rotator))]
     public class Cannon : MonoBehaviour
     {
-        [SerializeField] private Rotator _rotator;
-
         [SerializeField] private Transform _transform;
+        [SerializeField] private Rotator _rotator;
 
         [SerializeField] private Transform _firePointTransform;
 
-        [SerializeField] private Mover _ballPrefab;
+        [SerializeField] private Ball _ballPrefab;
+
+        [SerializeField] private ColorTeam _team;
 
         private const float aimLineAlphaEnabled = 1f;
         private const float aimLineAlphaDisabled = 0f;
@@ -41,11 +41,10 @@ namespace StationDefense
 
         public void Shoot()
         {
-            Mover ballMover = PoolStorage.GetFromPool(nameof(Ball), _ballPrefab, _firePointTransform.position,
+            Ball ball = PoolStorage.GetFromPool(nameof(Ball), _ballPrefab, _firePointTransform.position,
                 Quaternion.identity);
 
-            ballMover.SetMoveDirection(_transform.up);
-            ballMover.StartMoving();
+            ball.Init(_team, _transform.up);
         }
     }
 }

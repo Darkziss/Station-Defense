@@ -14,6 +14,8 @@ namespace StationDefense
 
         [SerializeField] private int _ballLayer;
 
+        public ColorTeam Team { get; private set; }
+
         private const float fadeDuration = 0.5f;
 
         private void OnValidate()
@@ -38,14 +40,23 @@ namespace StationDefense
             _boxCollider.enabled = true;
         }
 
-        public void Activate()
+        public void Init(ColorTeam team)
         {
+            Team = team;
+
+            _spriteRenderer.color = TeamColorStorage.GetByTeam(team);
+
             _mover.StartMoving();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.layer != _ballLayer)
+                return;
+
+            Ball ball = collision.gameObject.GetComponent<Ball>();
+
+            if (ball.Team != Team)
                 return;
 
             _boxCollider.enabled = false;

@@ -64,8 +64,12 @@ namespace StationDefense
 
                 Enemy enemy = PoolStorage.GetFromPool(nameof(Enemy), _enemyPrefab, position,
                     Quaternion.identity);
-                enemy.Activate();
+                ColorTeam team = GetRandomTeam();
+                
+                enemy.Init(team);
             }
         }
+
+        private ColorTeam GetRandomTeam() => (ColorTeam)Random.Range(0, 4);
     }
 }

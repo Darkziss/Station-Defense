@@ -8,7 +8,7 @@ namespace StationDefense
 
         [SerializeField] private bool _isRotating = false;
 
-        [SerializeField] private float _rotationAngle = 1f;
+        [SerializeField] private float _rotationAngle = 0f;
 
         public bool IsRotating => _isRotating;
 
@@ -22,6 +22,8 @@ namespace StationDefense
 
             _targetTransform.localRotation = Quaternion.Euler(localRotation);
         }
+
+        public void InverseAngle() => _rotationAngle = -_rotationAngle;
 
         public void StartRotating()
         {

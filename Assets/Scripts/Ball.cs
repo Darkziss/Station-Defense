@@ -6,13 +6,19 @@ namespace StationDefense
     [RequireComponent(typeof(Mover))]
     public class Ball : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Mover _mover;
 
         [SerializeField] private int _barrierLayer;
         [SerializeField] private int _enemyLayer;
 
+        public ColorTeam Team { get; private set; }
+
         private void OnValidate()
         {
+            if (_spriteRenderer == null)
+                _spriteRenderer = GetComponent<SpriteRenderer>();
+
             if (_mover == null)
                 _mover = GetComponent<Mover>();
         }
@@ -22,7 +28,19 @@ namespace StationDefense
             int collisionLayer = collision.gameObject.layer;
 
             if (collisionLayer == _barrierLayer || collisionLayer == _enemyLayer)
-                PoolStorage.PutToPool(nameof(Ball), this);
+                Disable();
         }
+
+        public void Init(ColorTeam team, Vector3 moveDirection)
+        {
+            Team = team;
+
+            _spriteRenderer.color = TeamColorStorage.GetByTeam(team);
+
+            _mover.SetMoveDirection(moveDirection);
+            _mover.StartMoving();
+        }
+
+        private void Disable() => PoolStorage.PutToPool(nameof(Ball), this);
     }
 }

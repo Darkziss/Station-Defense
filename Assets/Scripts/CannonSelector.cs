@@ -54,6 +54,8 @@ namespace StationDefense
             else if (resetInput)
             {
                 _selectedCannon.Deactivate();
+
+                _selectedIndex = defaultSelectedIndex;
                 _selectedCannon = null;
                 
                 MoveCameraToPosition(Vector2.zero);

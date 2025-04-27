@@ -499,10 +499,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e080082ebde99449f2b6add9a6ffb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotator: {fileID: 240024669}
   _transform: {fileID: 240024666}
+  _rotator: {fileID: 240024669}
   _firePointTransform: {fileID: 281282817}
-  _ballPrefab: {fileID: 2336154029460797410, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
+  _ballPrefab: {fileID: -3529744894406713139, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
+  _team: 0
 --- !u!114 &240024669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,7 +518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetTransform: {fileID: 506570229}
   _isRotating: 0
-  _rotationAngle: -60
+  _rotationAngle: -80
 --- !u!1 &272807639
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,10 +811,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e080082ebde99449f2b6add9a6ffb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotator: {fileID: 339624343}
   _transform: {fileID: 339624341}
+  _rotator: {fileID: 339624343}
   _firePointTransform: {fileID: 1925334172}
-  _ballPrefab: {fileID: 2336154029460797410, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
+  _ballPrefab: {fileID: -3529744894406713139, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
+  _team: 1
 --- !u!114 &339624343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,7 +830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetTransform: {fileID: 148617795}
   _isRotating: 0
-  _rotationAngle: -60
+  _rotationAngle: -80
 --- !u!212 &339624344
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1320,10 +1322,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e080082ebde99449f2b6add9a6ffb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotator: {fileID: 775541467}
   _transform: {fileID: 775541465}
+  _rotator: {fileID: 775541467}
   _firePointTransform: {fileID: 215958382}
-  _ballPrefab: {fileID: 2336154029460797410, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
+  _ballPrefab: {fileID: -3529744894406713139, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
+  _team: 2
 --- !u!114 &775541467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1338,7 +1341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetTransform: {fileID: 1670426967}
   _isRotating: 0
-  _rotationAngle: -60
+  _rotationAngle: -80
 --- !u!212 &775541468
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2703,10 +2706,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e080082ebde99449f2b6add9a6ffb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotator: {fileID: 1533892768}
   _transform: {fileID: 1533892766}
+  _rotator: {fileID: 1533892768}
   _firePointTransform: {fileID: 634158971}
-  _ballPrefab: {fileID: 2336154029460797410, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
+  _ballPrefab: {fileID: -3529744894406713139, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
+  _team: 3
 --- !u!114 &1533892768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2721,7 +2725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetTransform: {fileID: 979567867}
   _isRotating: 0
-  _rotationAngle: -60
+  _rotationAngle: -80
 --- !u!212 &1533892769
 SpriteRenderer:
   m_ObjectHideFlags: 0

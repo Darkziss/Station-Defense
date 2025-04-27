@@ -164,8 +164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 2981331996182900431}
   _isMoving: 0
-  _moveSpeed: 5
-  _moveDirection: {x: 0, y: 1, z: 0}
+  _moveSpeed: 10
+  _moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &-3529744894406713139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bd0b21e4e96f846aec741934a95884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 282930186657110533}
   _mover: {fileID: 2336154029460797410}
   _barrierLayer: 7
   _enemyLayer: 8

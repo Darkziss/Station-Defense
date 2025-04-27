@@ -15,6 +15,9 @@ namespace StationDefense
 
         private const int damage = 1;
 
+        public event Action<int> HealthChanged;
+        public event Action BaseDied;
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (!IsDead)
@@ -24,6 +27,8 @@ namespace StationDefense
         public void Init()
         {
             _health = _maxHealth;
+
+            HealthChanged?.Invoke(_health);
         }
 
         public void Damage()
@@ -32,6 +37,11 @@ namespace StationDefense
                 throw new InvalidOperationException(nameof(IsDead));
 
             _health -= damage;
+
+            HealthChanged?.Invoke(_health);
+            
+            if (IsDead)
+                BaseDied?.Invoke();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace StationDefense
         [SerializeField] private Camera _camera;
         
         [SerializeField] private Cannon[] _cannons = new Cannon[4];
+        [SerializeField] private Transform[] _cannonBases = new Transform[4];
 
         [SerializeField] private KeyCode[] _cannonKeyCodes = new KeyCode[4];
         [SerializeField] private KeyCode _resetKeyCode = KeyCode.Space;
@@ -24,11 +25,23 @@ namespace StationDefense
         private const int shootMouseCode = 0;
         private const int inverseMouseCode = 1;
 
+        public void ResetAll()
+        {
+            if (HaveSelectedCannon)
+                _selectedCannon.Deactivate();
+            
+            _selectedIndex = defaultSelectedIndex;
+            _selectedCannon = null;
+
+            MoveCameraToPosition(Vector2.zero, false);
+        }
+
         private void Update()
         {
             bool switchInput = CheckForInput(out int index);
+            bool isSameIndex = index == _selectedIndex;
 
-            if (switchInput && index != _selectedIndex)
+            if (switchInput && !isSameIndex)
             {
                 if (HaveSelectedCannon)
                     _selectedCannon.Deactivate();
@@ -36,7 +49,7 @@ namespace StationDefense
                 _selectedIndex = index;
                 _selectedCannon = _cannons[index];
 
-                MoveCameraToPosition(_selectedCannon.transform.position);
+                MoveCameraToPosition(_cannonBases[index].position, true);
                 _selectedCannon.Activate();
 
                 return;
@@ -60,7 +73,7 @@ namespace StationDefense
                 _selectedIndex = defaultSelectedIndex;
                 _selectedCannon = null;
 
-                MoveCameraToPosition(Vector2.zero);
+                MoveCameraToPosition(Vector2.zero, true);
             }
             
             if (inverseInput)
@@ -91,12 +104,15 @@ namespace StationDefense
             return false;
         }
 
-        private void MoveCameraToPosition(Vector2 position)
+        private void MoveCameraToPosition(Vector2 position, bool animate)
         {
             float cameraZPosition = _camera.transform.position.z;
             Vector3 endPosition = new(position.x, position.y, cameraZPosition);
 
-            Tween.Position(_camera.transform, endPosition, _cameraTweenSettings);
+            if (animate)
+                Tween.Position(_camera.transform, endPosition, _cameraTweenSettings);
+            else
+                _camera.transform.position = endPosition;
         }
     }
 }

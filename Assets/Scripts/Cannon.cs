@@ -29,6 +29,11 @@ namespace StationDefense
                 _transform = transform;
         }
 
+        private void Start()
+        {
+            DeathHandler.GameRestarted += _rotator.ResetRotation;
+        }
+
         public void Activate()
         {
             _rotator.StartRotating();

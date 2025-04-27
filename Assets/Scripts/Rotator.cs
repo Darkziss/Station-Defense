@@ -40,5 +40,7 @@ namespace StationDefense
 
             _isRotating = false;
         }
+
+        public void ResetRotation() => _targetTransform.rotation = Quaternion.Euler(Vector3.zero); 
     }
 }

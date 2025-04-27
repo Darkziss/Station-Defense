@@ -1,4 +1,5 @@
 using UnityEngine;
+using StationDefense.UI;
 using Pooling;
 using PrimeTween;
 
@@ -10,6 +11,10 @@ namespace StationDefense
 
         [SerializeField] private int _tweenCapacity = 5;
 
+        [SerializeField] private MainPresenter _mainPresenter;
+
+        [SerializeField] private DeathHandler _deathHandler;
+
         [SerializeField] private Base _base;
 
         private void Awake()
@@ -19,6 +24,10 @@ namespace StationDefense
             PoolStorage.Init();
 
             PrimeTweenConfig.SetTweensCapacity(_tweenCapacity);
+
+            _mainPresenter.Init();
+
+            _deathHandler.Init();
 
             _base.Init();
         }

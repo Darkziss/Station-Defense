@@ -31,12 +31,20 @@ namespace StationDefense
                 _mover = GetComponent<TargetMover>();
         }
 
+        private void Start()
+        {
+            DeathHandler.GameRestarted += () => Disable(false);
+        }
+
         private void OnEnable()
         {
-            Color color = _spriteRenderer.color;
-            color.a = 1f;
+            if (_spriteRenderer.color.a < 1f)
+            {
+                Color color = _spriteRenderer.color;
+                color.a = 1f;
 
-            _spriteRenderer.color = color;
+                _spriteRenderer.color = color;
+            }
 
             _boxCollider.enabled = true;
         }
@@ -58,23 +66,32 @@ namespace StationDefense
 
                 if (ball.Team == Team)
                 {
-                    Disable();
+                    Disable(true);
                     return;
                 }
             }
 
             if (collision.gameObject.layer == _baseLayer)
-                Disable();
+                Disable(true);
         }
 
-        private void Disable()
+        private void Disable(bool playAnimation)
         {
+            void PutToPool() => PoolStorage.PutToPool(nameof(Enemy), this);
+
             _boxCollider.enabled = false;
 
             _mover.StopMoving();
 
-            Tween.Alpha(_spriteRenderer, 0f, fadeDuration)
-                .OnComplete(() => PoolStorage.PutToPool(nameof(Enemy), this));
+            if (playAnimation)
+            {
+                Tween.Alpha(_spriteRenderer, 0f, fadeDuration)
+                    .OnComplete(PutToPool);
+            }
+            else
+            {
+                PutToPool();
+            }
         }
     }
 }

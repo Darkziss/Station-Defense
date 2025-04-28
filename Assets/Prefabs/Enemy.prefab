@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 8697786229375253760}
   _isMoving: 0
-  moveSpeed: 1
+  moveSpeed: 0.7
 --- !u!114 &7246735978007310398
 MonoBehaviour:
   m_ObjectHideFlags: 0

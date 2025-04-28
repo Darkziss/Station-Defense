@@ -9,12 +9,14 @@ namespace StationDefense
         [SerializeField] private EnemySpawner _enemySpawner;
 
         [SerializeField] private int _currentWave = 0;
-        [SerializeField] private float _currentWaveDuration = 5f;
+        [SerializeField] private float _currentWaveDuration = defaultWaveDuration;
 
         private Coroutine _waveCycleCoroutine;
 
         private readonly MutableWaitForSeconds _waveDuration = new();
         private readonly WaitForSeconds _waveCooldown = new(10f);
+
+        private const float defaultWaveDuration = 5f;
 
         private const float waveDurationIncrement = 1.5f;
 
@@ -37,6 +39,9 @@ namespace StationDefense
             _enemySpawner.StopSpawn();
 
             StopCoroutine(_waveCycleCoroutine);
+
+            _currentWave = 0;
+            _currentWaveDuration = defaultWaveDuration;
         }
 
         private IEnumerator WaveCycle()

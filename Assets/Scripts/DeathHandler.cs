@@ -7,7 +7,7 @@ namespace StationDefense
     {
         [SerializeField] private Base _base;
 
-        [SerializeField] private EnemySpawner _enemySpawner;
+        [SerializeField] private WaveTracker _waveTracker;
         [SerializeField] private CannonSelector _cannonSelector;
 
         public bool IsGameStopped { get; private set; } = false;
@@ -44,7 +44,7 @@ namespace StationDefense
             
             Time.timeScale = 0;
 
-            _enemySpawner.StopSpawn();
+            _waveTracker.StopWaveCycle();
 
             _cannonSelector.gameObject.SetActive(false);
 

@@ -9,8 +9,12 @@ namespace StationDefense
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Mover _mover;
 
+        [SerializeField] private int _damage;
+
         [SerializeField] private int _barrierLayer;
         [SerializeField] private int _enemyLayer;
+
+        public int Damage => _damage;
 
         public ColorTeam Team { get; private set; }
 

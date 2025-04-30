@@ -180,5 +180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 282930186657110533}
   _mover: {fileID: 2336154029460797410}
+  _damage: 1
   _barrierLayer: 7
   _enemyLayer: 8

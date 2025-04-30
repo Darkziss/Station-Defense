@@ -4,13 +4,15 @@ using PrimeTween;
 
 namespace StationDefense
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(TargetMover))]
+    [RequireComponent(typeof(BoxCollider2D), typeof(TargetMover), typeof(Health))]
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BoxCollider2D _boxCollider;
         
         [SerializeField] private TargetMover _mover;
+
+        [SerializeField] private Health _health;
 
         [SerializeField] private int _ballLayer;
         [SerializeField] private int _baseLayer;
@@ -29,6 +31,9 @@ namespace StationDefense
 
             if (_mover == null)
                 _mover = GetComponent<TargetMover>();
+
+            if (_health == null)
+                _health = GetComponent<Health>();
         }
 
         private void Start()
@@ -47,6 +52,8 @@ namespace StationDefense
             }
 
             _boxCollider.enabled = true;
+
+            _health.RestoreHealth();
         }
 
         public void Init(ColorTeam team)
@@ -64,11 +71,13 @@ namespace StationDefense
             {
                 Ball ball = collision.gameObject.GetComponent<Ball>();
 
-                if (ball.Team == Team)
-                {
-                    Disable(true);
+                if (ball.Team != Team)
                     return;
-                }
+
+                _health.ChangeHealth(-ball.Damage);
+
+                if (_health.IsHealthAtZero)
+                    Disable(true);
             }
 
             if (collision.gameObject.layer == _baseLayer)

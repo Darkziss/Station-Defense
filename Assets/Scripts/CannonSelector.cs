@@ -60,11 +60,7 @@ namespace StationDefense
             bool shootInput = Input.GetMouseButtonDown(shootMouseCode);
             bool resetInput = Input.GetKeyDown(_resetKeyCode);
 
-            if (shootInput)
-            {
-                ShootFromCannon();
-            }
-            else if (resetInput)
+            if (resetInput)
             {
                 _selectedCannon.Deactivate();
 
@@ -73,11 +69,6 @@ namespace StationDefense
 
                 MoveCameraToPosition(Vector2.zero, true);
             }
-        }
-
-        private void ShootFromCannon()
-        {
-            _selectedCannon.Shoot();
         }
 
         private bool CheckForInput(out int index)

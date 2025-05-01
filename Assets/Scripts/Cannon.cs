@@ -1,5 +1,6 @@
 using UnityEngine;
 using Pooling;
+using System.Collections;
 
 namespace StationDefense
 {
@@ -14,14 +15,18 @@ namespace StationDefense
 
         [SerializeField] private Ball _ballPrefab;
 
-        [SerializeField] private float _rotateSpeed;
-
+        [SerializeField] private bool _canShoot;
         [SerializeField] private ColorTeam _team;
+
+        private Coroutine _shootCoroutine;
+
+        private readonly WaitForSeconds _shootDelay = new(0.1f);
 
         public bool IsActive { get; private set; } = false;
 
-        private const float aimLineAlphaEnabled = 1f;
-        private const float aimLineAlphaDisabled = 0f;
+        private bool IsShooting => _shootCoroutine != null;
+
+        private const int shootMouseButton = 0;
 
         private const float fadeDuration = 0.3f;
 
@@ -34,19 +39,21 @@ namespace StationDefense
         private void Start()
         {
             DeathHandler.GameRestarted += () => _rotatePointTransform.rotation = Quaternion.identity;
-        }
+        } 
 
         private void Update()
         {
             if (!IsActive)
                 return;
-            
-            Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
 
-            Vector2 mouseDirection = mouseWorldPosition - _rotatePointTransform.position;
-            mouseDirection.Normalize();
+            LookAtMouse();
 
-            _rotatePointTransform.rotation = Quaternion.FromToRotation(Vector3.up, mouseDirection);
+            bool shootInput = Input.GetMouseButton(shootMouseButton);
+
+            if (shootInput && !IsShooting)
+                StartShooting();
+            else if (!shootInput && IsShooting)
+                StopShooting();
         }
 
         public void Activate()
@@ -57,14 +64,49 @@ namespace StationDefense
         public void Deactivate()
         {
             IsActive = false;
+
+            if (IsShooting)
+                StopShooting();
         }
 
-        public void Shoot()
+        private void LookAtMouse()
+        {
+            Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+
+            Vector2 mouseDirection = mouseWorldPosition - _rotatePointTransform.position;
+            mouseDirection.Normalize();
+
+            _rotatePointTransform.rotation = Quaternion.FromToRotation(Vector3.up, mouseDirection);
+        }
+
+        private void StartShooting()
+        {
+            _shootCoroutine = StartCoroutine(ShootWithDelay());
+        }
+
+        private void StopShooting()
+        {
+            StopCoroutine(_shootCoroutine);
+            _shootCoroutine = null;
+        }
+
+        private void InstantShoot()
         {
             Ball ball = PoolStorage.GetFromPool(nameof(Ball), _ballPrefab, _firePointTransform.position,
                 Quaternion.identity);
 
             ball.Init(_team, _transform.up);
         }
+
+        private IEnumerator ShootWithDelay()
+        {
+            while (true)
+            {
+                yield return _shootDelay;
+
+                InstantShoot();
+            }
+        }
+
     }
 }

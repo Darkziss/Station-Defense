@@ -18,7 +18,7 @@ namespace StationDefense
 
         private const float defaultWaveDuration = 5f;
 
-        private const float waveDurationIncrement = 1.5f;
+        private const float waveDurationIncrement = 3f;
 
         public event Action<int> NewWaveStarted;
         public event Action<int> WaveEnded;

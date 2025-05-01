@@ -7,6 +7,8 @@ namespace StationDefense
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private Enemy _enemyPrefab;
+        [SerializeField] private Enemy _fastEnemyPrefab;
+        [SerializeField] private Enemy _strongEnemyPrefab;
 
         [SerializeField] private bool _shouldSpawn = false;
 
@@ -42,34 +44,57 @@ namespace StationDefense
 
         private IEnumerator SpawnEnemiesRandomly()
         {
-            static bool RandomBool() => Random.Range(0, 2) != 0;
-            
             while (true)
             {
                 yield return _spawnDelay;
 
-                bool vertical = RandomBool();
-                Vector3 position = new();
-
-                if (vertical)
-                {
-                    position.x = Random.Range(minX, maxX);
-                    position.y = RandomBool() ? minY : maxY;
-                }
-                else
-                {
-                    position.x = RandomBool() ? minX : maxX;
-                    position.y = Random.Range(minY, maxY);
-                }
-
-                Enemy enemy = PoolStorage.GetFromPool(nameof(Enemy), _enemyPrefab, position,
-                    Quaternion.identity);
+                Enemy enemyPrefab = GetRandomEnemy();
+                Vector3 position = GetRandomPosition();
                 ColorTeam team = GetRandomTeam();
+
+                Enemy enemy = PoolStorage.GetFromPool(nameof(Enemy), enemyPrefab, position,
+                    Quaternion.identity);
                 
                 enemy.Init(team);
             }
         }
 
-        private ColorTeam GetRandomTeam() => (ColorTeam)Random.Range(0, 4);
+        private static bool GetRandomBool() => Random.Range(0, 2) != 0;
+
+        private Enemy GetRandomEnemy()
+        {
+            int enemyType = Random.Range(1, 4);
+
+            Debug.Log($"Enemy Type: {enemyType}");
+
+            return enemyType switch
+            {
+                1 => _enemyPrefab,
+                2 => _fastEnemyPrefab,
+                3 => _strongEnemyPrefab,
+                _ => _enemyPrefab
+            };
+        }
+
+        private static Vector3 GetRandomPosition()
+        {
+            bool vertical = GetRandomBool();
+            Vector3 position = new();
+
+            if (vertical)
+            {
+                position.x = Random.Range(minX, maxX);
+                position.y = GetRandomBool() ? minY : maxY;
+            }
+            else
+            {
+                position.x = GetRandomBool() ? minX : maxX;
+                position.y = Random.Range(minY, maxY);
+            }
+
+            return position;
+        }
+
+        private static ColorTeam GetRandomTeam() => (ColorTeam)Random.Range(0, 4);
     }
 }

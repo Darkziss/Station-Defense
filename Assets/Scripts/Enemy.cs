@@ -71,10 +71,9 @@ namespace StationDefense
             {
                 Ball ball = collision.gameObject.GetComponent<Ball>();
 
-                if (ball.Team != Team)
-                    return;
+                int desiredDamage = ball.Team == Team ? ball.ColorDamage : ball.BaseDamage;
 
-                _health.ChangeHealth(-ball.Damage);
+                _health.ChangeHealth(-desiredDamage);
 
                 if (_health.IsHealthAtZero)
                     Disable(true);

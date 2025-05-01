@@ -9,14 +9,18 @@ namespace StationDefense
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Mover _mover;
 
-        [SerializeField] private int _damage;
+        [SerializeField] private int _baseDamage;
 
         [SerializeField] private int _barrierLayer;
         [SerializeField] private int _enemyLayer;
 
-        public int Damage => _damage;
+        public int BaseDamage => _baseDamage;
+
+        public int ColorDamage => _baseDamage * damageMultiplier;
 
         public ColorTeam Team { get; private set; }
+
+        private const int damageMultiplier = 3;
 
         private void OnValidate()
         {

@@ -23,7 +23,6 @@ namespace StationDefense
         private const int defaultSelectedIndex = -1;
 
         private const int shootMouseCode = 0;
-        private const int inverseMouseCode = 1;
 
         public void ResetAll()
         {
@@ -59,7 +58,6 @@ namespace StationDefense
                 return;
 
             bool shootInput = Input.GetMouseButtonDown(shootMouseCode);
-            bool inverseInput = Input.GetMouseButtonDown(inverseMouseCode);
             bool resetInput = Input.GetKeyDown(_resetKeyCode);
 
             if (shootInput)
@@ -74,11 +72,6 @@ namespace StationDefense
                 _selectedCannon = null;
 
                 MoveCameraToPosition(Vector2.zero, true);
-            }
-            
-            if (inverseInput)
-            {
-                _selectedCannon.InverseAngle();
             }
         }
 

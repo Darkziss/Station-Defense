@@ -3,17 +3,22 @@ using Pooling;
 
 namespace StationDefense
 {
-    [RequireComponent(typeof(Rotator))]
     public class Cannon : MonoBehaviour
     {
-        [SerializeField] private Transform _transform;
-        [SerializeField] private Rotator _rotator;
+        [SerializeField] private Camera _camera;
 
+        [SerializeField] private Transform _transform;
+
+        [SerializeField] private Transform _rotatePointTransform;
         [SerializeField] private Transform _firePointTransform;
 
         [SerializeField] private Ball _ballPrefab;
 
+        [SerializeField] private float _rotateSpeed;
+
         [SerializeField] private ColorTeam _team;
+
+        public bool IsActive { get; private set; } = false;
 
         private const float aimLineAlphaEnabled = 1f;
         private const float aimLineAlphaDisabled = 0f;
@@ -22,29 +27,37 @@ namespace StationDefense
 
         private void OnValidate()
         {
-            if (_rotator == null)
-                _rotator = GetComponent<Rotator>();
-
             if (_transform == null)
                 _transform = transform;
         }
 
         private void Start()
         {
-            DeathHandler.GameRestarted += _rotator.ResetRotation;
+            DeathHandler.GameRestarted += () => _rotatePointTransform.rotation = Quaternion.identity;
+        }
+
+        private void Update()
+        {
+            if (!IsActive)
+                return;
+            
+            Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+
+            Vector2 mouseDirection = mouseWorldPosition - _rotatePointTransform.position;
+            mouseDirection.Normalize();
+
+            _rotatePointTransform.rotation = Quaternion.FromToRotation(Vector3.up, mouseDirection);
         }
 
         public void Activate()
         {
-            _rotator.StartRotating();
+            IsActive = true;
         }
 
         public void Deactivate()
         {
-            _rotator.StopRotating();
+            IsActive = false;
         }
-
-        public void InverseAngle() => _rotator.InverseAngle();
 
         public void Shoot()
         {

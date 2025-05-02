@@ -57,6 +57,7 @@ namespace StationDefense
             if (!HaveSelectedCannon)
                 return;
 
+            // DELETE
             bool shootInput = Input.GetMouseButtonDown(shootMouseCode);
             bool resetInput = Input.GetKeyDown(_resetKeyCode);
 

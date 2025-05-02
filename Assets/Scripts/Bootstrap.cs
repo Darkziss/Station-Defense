@@ -1,4 +1,5 @@
 using UnityEngine;
+using StationDefense.InputSystem;
 using StationDefense.UI;
 using Pooling;
 using PrimeTween;
@@ -10,6 +11,8 @@ namespace StationDefense
         [SerializeField] private int _targetFrameRate = 60;
 
         [SerializeField] private int _tweenCapacity = 5;
+
+        [SerializeField] private InputHandler _inputHandler;
 
         [SerializeField] private MainPresenter _mainPresenter;
 
@@ -24,6 +27,8 @@ namespace StationDefense
             PoolStorage.Init();
 
             PrimeTweenConfig.SetTweensCapacity(_tweenCapacity);
+
+            _inputHandler.Init();
 
             _mainPresenter.Init();
 

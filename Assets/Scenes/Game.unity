@@ -1694,6 +1694,56 @@ Transform:
   - {fileID: 506570229}
   m_Father: {fileID: 1838563398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &826096184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 826096185}
+  - component: {fileID: 826096186}
+  m_Layer: 0
+  m_Name: InputHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &826096185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826096184}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1336661313}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &826096186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826096184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da533ea848d4feb4fb036c3223e8c5a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cannons:
+  - {fileID: 240024668}
+  - {fileID: 339624342}
+  - {fileID: 775541466}
+  - {fileID: 1533892767}
+  _actions: {fileID: -944628639613478452, guid: 58ce9cf03300fa74d85142b3d21787c8, type: 3}
 --- !u!1 &869914537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,6 +1775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetFrameRate: 60
   _tweenCapacity: 10
+  _inputHandler: {fileID: 0}
   _mainPresenter: {fileID: 1083956582}
   _deathHandler: {fileID: 603975970}
   _base: {fileID: 337711924}
@@ -2948,6 +2999,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 826096185}
   - {fileID: 603975969}
   - {fileID: 993123482}
   - {fileID: 1359198080}
@@ -3719,7 +3771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 7246735978007310398, guid: fd02fae39eec2704e9ffc8fab06888f2, type: 3}
   _fastEnemyPrefab: {fileID: 6566398172999008713, guid: 9705059ad898d6e43918daec0f10aba7, type: 3}
-  _strongEnemyPrefab: {fileID: 0}
+  _strongEnemyPrefab: {fileID: 5062163126213795434, guid: 897032f100b084d4ab85406ccc1139fb, type: 3}
   _shouldSpawn: 0
 --- !u!1 &1838563397
 GameObject:

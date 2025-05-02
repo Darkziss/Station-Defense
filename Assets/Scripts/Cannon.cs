@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
 using Pooling;
-using System.Collections;
 
 namespace StationDefense
 {
@@ -48,12 +48,12 @@ namespace StationDefense
 
             LookAtMouse();
 
-            bool shootInput = Input.GetMouseButton(shootMouseButton);
+            //bool shootInput = Input.GetMouseButton(shootMouseButton);
 
-            if (shootInput && !IsShooting)
-                StartShooting();
-            else if (!shootInput && IsShooting)
-                StopShooting();
+            //if (shootInput && !IsShooting)
+            //    StartShooting();
+            //else if (!shootInput && IsShooting)
+            //    StopShooting();
         }
 
         public void Activate()
@@ -67,6 +67,30 @@ namespace StationDefense
 
             if (IsShooting)
                 StopShooting();
+        }
+
+        public void OnShootStarted()
+        {
+            Debug.Log($"Tried {nameof(OnShootStarted)}");
+
+            if (!IsActive || IsShooting)
+                return;
+
+            StartShooting();
+
+            Debug.Log(nameof(OnShootStarted));
+        }
+
+        public void OnShootStopped()
+        {
+            Debug.Log($"Tried {nameof(OnShootStopped)}");
+            
+            if (!IsShooting)
+                return;
+            
+            StopShooting();
+
+            Debug.Log(nameof(OnShootStopped));
         }
 
         private void LookAtMouse()

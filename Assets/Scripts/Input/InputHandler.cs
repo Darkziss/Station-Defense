@@ -7,20 +7,26 @@ namespace StationDefense.InputSystem
     {
         [SerializeField] private InputActionAsset _actions;
 
+        public static InputAction SelectCannonAction { get; private set; }
         public static InputAction LookAction { get; private set; }
         public static InputAction ShootAction { get; private set; }
+        public static InputAction ResetCannonAction { get; private set; }
 
         private const string actionMapName = "Main";
 
+        private const string selectCannonActionName = "SelectCannon";
         private const string lookActionName = "Look";
         private const string shootActionName = "Shoot";
+        private const string resetCannonActionName = "ResetCannon";
 
         public void Init()
         {
             InputActionMap actionMap = _actions.FindActionMap(actionMapName);
 
+            SelectCannonAction = actionMap.FindAction(selectCannonActionName);
             LookAction = actionMap.FindAction(lookActionName);
             ShootAction = actionMap.FindAction(shootActionName);
+            ResetCannonAction = actionMap.FindAction(resetCannonActionName);
         }
     }
 }

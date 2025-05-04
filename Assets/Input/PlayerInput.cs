@@ -30,6 +30,15 @@ namespace StationDefense
             ""id"": ""5dbc9b56-6e05-429c-a3db-668f08fde1bb"",
             ""actions"": [
                 {
+                    ""name"": ""SelectCannon"",
+                    ""type"": ""Value"",
+                    ""id"": ""98178cff-5f0f-4cd6-b553-4b5f4e37a8f7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Look"",
                     ""type"": ""Value"",
                     ""id"": ""d2f2491f-fb21-4efd-8005-8ec190e8c11c"",
@@ -42,6 +51,15 @@ namespace StationDefense
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""f3abb689-6faf-4fab-a5d6-1d9fcd47008c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetCannon"",
+                    ""type"": ""Button"",
+                    ""id"": ""4dcc251f-1d70-4962-afba-6f58dc77081a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -70,6 +88,72 @@ namespace StationDefense
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""id"": ""89cb0e97-ac83-4a8f-a693-cd360d94f981"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectCannon"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""95dd54d8-e6ef-45f6-8395-ff43280ae504"",
+                    ""path"": ""<Keyboard>/#(W)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Desktop"",
+                    ""action"": ""SelectCannon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""aa26b12c-b189-4a96-83e1-cb024e1bfe19"",
+                    ""path"": ""<Keyboard>/#(S)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Desktop"",
+                    ""action"": ""SelectCannon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8a635378-6bc6-4894-ba72-76efd9ef5b14"",
+                    ""path"": ""<Keyboard>/#(A)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Desktop"",
+                    ""action"": ""SelectCannon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""3679d9df-c90e-4643-a25b-c40c9f4a803d"",
+                    ""path"": ""<Keyboard>/#(D)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Desktop"",
+                    ""action"": ""SelectCannon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc0d46d9-dcaa-40b8-868e-10cfe35cfddb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Desktop"",
+                    ""action"": ""ResetCannon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -95,8 +179,10 @@ namespace StationDefense
 }");
             // Main
             m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
+            m_Main_SelectCannon = m_Main.FindAction("SelectCannon", throwIfNotFound: true);
             m_Main_Look = m_Main.FindAction("Look", throwIfNotFound: true);
             m_Main_Shoot = m_Main.FindAction("Shoot", throwIfNotFound: true);
+            m_Main_ResetCannon = m_Main.FindAction("ResetCannon", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -158,14 +244,18 @@ namespace StationDefense
         // Main
         private readonly InputActionMap m_Main;
         private List<IMainActions> m_MainActionsCallbackInterfaces = new List<IMainActions>();
+        private readonly InputAction m_Main_SelectCannon;
         private readonly InputAction m_Main_Look;
         private readonly InputAction m_Main_Shoot;
+        private readonly InputAction m_Main_ResetCannon;
         public struct MainActions
         {
             private @PlayerInput m_Wrapper;
             public MainActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @SelectCannon => m_Wrapper.m_Main_SelectCannon;
             public InputAction @Look => m_Wrapper.m_Main_Look;
             public InputAction @Shoot => m_Wrapper.m_Main_Shoot;
+            public InputAction @ResetCannon => m_Wrapper.m_Main_ResetCannon;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -175,22 +265,34 @@ namespace StationDefense
             {
                 if (instance == null || m_Wrapper.m_MainActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_MainActionsCallbackInterfaces.Add(instance);
+                @SelectCannon.started += instance.OnSelectCannon;
+                @SelectCannon.performed += instance.OnSelectCannon;
+                @SelectCannon.canceled += instance.OnSelectCannon;
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @ResetCannon.started += instance.OnResetCannon;
+                @ResetCannon.performed += instance.OnResetCannon;
+                @ResetCannon.canceled += instance.OnResetCannon;
             }
 
             private void UnregisterCallbacks(IMainActions instance)
             {
+                @SelectCannon.started -= instance.OnSelectCannon;
+                @SelectCannon.performed -= instance.OnSelectCannon;
+                @SelectCannon.canceled -= instance.OnSelectCannon;
                 @Look.started -= instance.OnLook;
                 @Look.performed -= instance.OnLook;
                 @Look.canceled -= instance.OnLook;
                 @Shoot.started -= instance.OnShoot;
                 @Shoot.performed -= instance.OnShoot;
                 @Shoot.canceled -= instance.OnShoot;
+                @ResetCannon.started -= instance.OnResetCannon;
+                @ResetCannon.performed -= instance.OnResetCannon;
+                @ResetCannon.canceled -= instance.OnResetCannon;
             }
 
             public void RemoveCallbacks(IMainActions instance)
@@ -219,8 +321,10 @@ namespace StationDefense
         }
         public interface IMainActions
         {
+            void OnSelectCannon(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
+            void OnResetCannon(InputAction.CallbackContext context);
         }
     }
 }

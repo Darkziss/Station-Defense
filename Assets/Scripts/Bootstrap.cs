@@ -18,7 +18,11 @@ namespace StationDefense
 
         [SerializeField] private DeathHandler _deathHandler;
 
+        [SerializeField] private CannonSelector _cannonSelector;
         [SerializeField] private Base _base;
+
+        [SerializeField] private Cannon[] _cannons;
+        [SerializeField] private Transform[] _cannonBases;
 
         private void Awake()
         {
@@ -34,6 +38,7 @@ namespace StationDefense
 
             _deathHandler.Init();
 
+            _cannonSelector.Init(_cannons, _cannonBases);
             _base.Init();
         }
     }

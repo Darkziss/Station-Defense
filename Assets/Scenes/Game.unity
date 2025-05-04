@@ -1773,7 +1773,18 @@ MonoBehaviour:
   _inputHandler: {fileID: 826096186}
   _mainPresenter: {fileID: 1083956582}
   _deathHandler: {fileID: 603975970}
+  _cannonSelector: {fileID: 993123483}
   _base: {fileID: 337711924}
+  _cannons:
+  - {fileID: 240024668}
+  - {fileID: 339624342}
+  - {fileID: 775541466}
+  - {fileID: 1533892767}
+  _cannonBases:
+  - {fileID: 818317162}
+  - {fileID: 1681852627}
+  - {fileID: 2067188317}
+  - {fileID: 816457908}
 --- !u!4 &869914539
 Transform:
   m_ObjectHideFlags: 0
@@ -2000,17 +2011,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
-  _cannons:
-  - {fileID: 240024668}
-  - {fileID: 339624342}
-  - {fileID: 775541466}
-  - {fileID: 1533892767}
-  _cannonBases:
-  - {fileID: 818317162}
-  - {fileID: 1681852627}
-  - {fileID: 2067188317}
-  - {fileID: 816457908}
-  _cannonKeyCodes: 61000000770000006400000073000000
   _resetKeyCode: 32
 --- !u!1 &994509874
 GameObject:

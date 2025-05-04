@@ -63,13 +63,6 @@ namespace StationDefense
                 StartShooting();
             else if (_shootAction.WasReleasedThisFrame() && IsShooting)
                 StopShooting();
-
-            //bool shootInput = Input.GetMouseButton(shootMouseButton);
-
-            //if (shootInput && !IsShooting)
-            //    StartShooting();
-            //else if (!shootInput && IsShooting)
-            //    StopShooting();
         }
 
         public void Activate()

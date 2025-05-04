@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 2981331996182900431}
   _isMoving: 0
-  _moveSpeed: 10
+  _moveSpeed: 15
   _moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &-3529744894406713139
 MonoBehaviour:

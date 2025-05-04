@@ -206,5 +206,6 @@ MonoBehaviour:
   _boxCollider: {fileID: 5093141828287509748}
   _mover: {fileID: 1720057489985665847}
   _health: {fileID: 3895438474054342534}
+  _enemyName: FastEnemy
   _ballLayer: 6
   _baseLayer: 9

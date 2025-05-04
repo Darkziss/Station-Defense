@@ -22,10 +22,6 @@ namespace StationDefense
         private const float minY = -maxY;
         private const float maxY = 6f;
 
-        private const string baseEnemyName = "BaseEnemy";
-        private const string fastEnemyName = "FastEnemy";
-        private const string strongEnemyName = "StrongEnemy";
-
         public void StartSpawn()
         {
             if (_shouldSpawn)
@@ -52,11 +48,11 @@ namespace StationDefense
             {
                 yield return _spawnDelay;
 
-                (string, Enemy) enemyData = GetRandomEnemy();
+                Enemy enemyPrefab = GetRandomEnemy();
                 Vector3 position = GetRandomPosition();
                 ColorTeam team = GetRandomTeam();
 
-                Enemy enemy = PoolStorage.GetFromPool(enemyData.Item1, enemyData.Item2, position,
+                Enemy enemy = PoolStorage.GetFromPool(enemyPrefab.EnemyName, enemyPrefab, position,
                     Quaternion.identity);
                 
                 enemy.Init(team);
@@ -65,16 +61,16 @@ namespace StationDefense
 
         private static bool GetRandomBool() => Random.Range(0, 2) != 0;
 
-        private (string, Enemy) GetRandomEnemy()
+        private Enemy GetRandomEnemy()
         {
             int enemyType = Random.Range(1, 4);
 
             return enemyType switch
             {
-                1 => (baseEnemyName, _enemyPrefab),
-                2 => (fastEnemyName, _fastEnemyPrefab),
-                3 => (strongEnemyName, _strongEnemyPrefab),
-                _ => (baseEnemyName, _enemyPrefab)
+                1 => _enemyPrefab,
+                2 => _fastEnemyPrefab,
+                3 => _strongEnemyPrefab,
+                _ => _enemyPrefab
             };
         }
 

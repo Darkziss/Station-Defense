@@ -14,8 +14,12 @@ namespace StationDefense
 
         [SerializeField] private Health _health;
 
+        [SerializeField] private string _enemyName;
+
         [SerializeField] private int _ballLayer;
         [SerializeField] private int _baseLayer;
+
+        public string EnemyName => _enemyName;
 
         public ColorTeam Team { get; private set; }
 
@@ -85,7 +89,7 @@ namespace StationDefense
 
         private void Disable(bool playAnimation)
         {
-            void PutToPool() => PoolStorage.PutToPool(nameof(Enemy), this);
+            void PutToPool() => PoolStorage.PutToPool(_enemyName, this);
 
             _boxCollider.enabled = false;
 

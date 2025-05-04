@@ -6,6 +6,15 @@
             "id": "5dbc9b56-6e05-429c-a3db-668f08fde1bb",
             "actions": [
                 {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "d2f2491f-fb21-4efd-8005-8ec190e8c11c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Shoot",
                     "type": "Button",
                     "id": "f3abb689-6faf-4fab-a5d6-1d9fcd47008c",
@@ -24,6 +33,17 @@
                     "processors": "",
                     "groups": "Desktop",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf82ce2f-fef1-418a-892b-66f1accd5ab8",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Desktop",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

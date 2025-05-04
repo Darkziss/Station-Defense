@@ -30,6 +30,15 @@ namespace StationDefense
             ""id"": ""5dbc9b56-6e05-429c-a3db-668f08fde1bb"",
             ""actions"": [
                 {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""d2f2491f-fb21-4efd-8005-8ec190e8c11c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""f3abb689-6faf-4fab-a5d6-1d9fcd47008c"",
@@ -48,6 +57,17 @@ namespace StationDefense
                     ""processors"": """",
                     ""groups"": ""Desktop"",
                     ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf82ce2f-fef1-418a-892b-66f1accd5ab8"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Desktop"",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -75,6 +95,7 @@ namespace StationDefense
 }");
             // Main
             m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
+            m_Main_Look = m_Main.FindAction("Look", throwIfNotFound: true);
             m_Main_Shoot = m_Main.FindAction("Shoot", throwIfNotFound: true);
         }
 
@@ -137,11 +158,13 @@ namespace StationDefense
         // Main
         private readonly InputActionMap m_Main;
         private List<IMainActions> m_MainActionsCallbackInterfaces = new List<IMainActions>();
+        private readonly InputAction m_Main_Look;
         private readonly InputAction m_Main_Shoot;
         public struct MainActions
         {
             private @PlayerInput m_Wrapper;
             public MainActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Look => m_Wrapper.m_Main_Look;
             public InputAction @Shoot => m_Wrapper.m_Main_Shoot;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
@@ -152,6 +175,9 @@ namespace StationDefense
             {
                 if (instance == null || m_Wrapper.m_MainActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_MainActionsCallbackInterfaces.Add(instance);
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
@@ -159,6 +185,9 @@ namespace StationDefense
 
             private void UnregisterCallbacks(IMainActions instance)
             {
+                @Look.started -= instance.OnLook;
+                @Look.performed -= instance.OnLook;
+                @Look.canceled -= instance.OnLook;
                 @Shoot.started -= instance.OnShoot;
                 @Shoot.performed -= instance.OnShoot;
                 @Shoot.canceled -= instance.OnShoot;
@@ -190,6 +219,7 @@ namespace StationDefense
         }
         public interface IMainActions
         {
+            void OnLook(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
         }
     }

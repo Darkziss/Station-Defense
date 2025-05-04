@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using StationDefense.InputSystem;
 using Pooling;
 
 namespace StationDefense
@@ -20,6 +22,9 @@ namespace StationDefense
 
         private Coroutine _shootCoroutine;
 
+        private InputAction _lookAction;
+        private InputAction _shootAction;
+
         private readonly WaitForSeconds _shootDelay = new(0.1f);
 
         public bool IsActive { get; private set; } = false;
@@ -38,6 +43,12 @@ namespace StationDefense
 
         private void Start()
         {
+            _lookAction = InputHandler.LookAction;
+            _shootAction = InputHandler.ShootAction;
+
+            _lookAction.Enable();
+            _shootAction.Enable();
+
             DeathHandler.GameRestarted += () => _rotatePointTransform.rotation = Quaternion.identity;
         } 
 
@@ -47,6 +58,11 @@ namespace StationDefense
                 return;
 
             LookAtMouse();
+
+            if (_shootAction.WasPressedThisFrame() && !IsShooting)
+                StartShooting();
+            else if (_shootAction.WasReleasedThisFrame() && IsShooting)
+                StopShooting();
 
             //bool shootInput = Input.GetMouseButton(shootMouseButton);
 
@@ -59,6 +75,9 @@ namespace StationDefense
         public void Activate()
         {
             IsActive = true;
+
+            if (_shootAction.IsPressed())
+                StartShooting();
         }
 
         public void Deactivate()
@@ -69,33 +88,10 @@ namespace StationDefense
                 StopShooting();
         }
 
-        public void OnShootStarted()
-        {
-            Debug.Log($"Tried {nameof(OnShootStarted)}");
-
-            if (!IsActive || IsShooting)
-                return;
-
-            StartShooting();
-
-            Debug.Log(nameof(OnShootStarted));
-        }
-
-        public void OnShootStopped()
-        {
-            Debug.Log($"Tried {nameof(OnShootStopped)}");
-            
-            if (!IsShooting)
-                return;
-            
-            StopShooting();
-
-            Debug.Log(nameof(OnShootStopped));
-        }
-
         private void LookAtMouse()
         {
-            Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mouseScreenPosition = _lookAction.ReadValue<Vector2>();
+            Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(mouseScreenPosition);
 
             Vector2 mouseDirection = mouseWorldPosition - _rotatePointTransform.position;
             mouseDirection.Normalize();

@@ -1,43 +1,43 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using StationDefense.InputSystem;
-using Pooling;
 using PrimeTween;
 
 namespace StationDefense
 {
+    [RequireComponent(typeof(CannonShooter))]
     public class Cannon : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
 
         [SerializeField] private Transform _transform;
 
-        [SerializeField] private Transform _rotatePointTransform;
-        [SerializeField] private Transform _firePointTransform;
+        [SerializeField] private CannonShooter _baseShooter;
+        [SerializeField] private CannonShooter _powerfulShooter;
 
-        [SerializeField] private Ball _ballPrefab;
-        [SerializeField] private Ball _bigBallPrefab;
+        [SerializeField] private Transform _rotatePointTransform;
+
+        [SerializeField] private float _baseShootDelay = 0.1f;
+        [SerializeField] private float _powerfulShootDelay = 1.5f;
 
         [SerializeField] private ColorTeam _team;
 
         private Vector2 _defaultLocalPosition;
-
-        private Coroutine _shootCoroutine;
-        private Coroutine _powerfulShootCoroutine;
 
         private InputAction _lookAction;
 
         private InputAction _shootAction;
         private InputAction _powerfulShootAction;
 
-        private readonly WaitForSeconds _shootDelay = new(0.1f);
-        private readonly WaitForSeconds _powerfulShootDelay = new(1f);
+        private readonly ShakeSettings _cannonShakeSettings = new(Vector3.one * shakeFactor, shakeDuration,
+            frequency: shakeFrequency, cycles: shakeCycles);
 
         public bool IsActive { get; private set; } = false;
 
-        private bool IsShooting => _shootCoroutine != null;
-        private bool IsPowerfulShooting => _powerfulShootCoroutine != null;
+        private const float shakeFactor = 0.1f;
+        private const float shakeDuration = 0.1f;
+        private const float shakeFrequency = 10f;
+        private const int shakeCycles = -1;
 
         private void OnValidate()
         {
@@ -58,14 +58,17 @@ namespace StationDefense
             _shootAction.Enable();
             _powerfulShootAction.Enable();
 
+            _baseShooter.Init(_baseShootDelay);
+            _powerfulShooter.Init(_powerfulShootDelay);
+
             _powerfulShootAction.performed += (_) =>
             {
                 if (!IsActive)
                     return;
 
-                StartPowerfulShooting();
+                _powerfulShooter.StartShooting(_team);
 
-                Tween.ShakeLocalPosition(_transform, Vector3.one * 0.1f, 0.1f, frequency: 10, cycles: -1);
+                Tween.ShakeLocalPosition(_transform, _cannonShakeSettings);
             };
 
             DeathHandler.GameRestarted += () => _rotatePointTransform.rotation = Quaternion.identity;
@@ -78,14 +81,14 @@ namespace StationDefense
 
             LookAtMouse();
 
-            if (_shootAction.WasPressedThisFrame() && !IsShooting)
-                StartShooting();
-            else if (_shootAction.WasReleasedThisFrame() && IsShooting)
-                StopShooting();
+            if (_shootAction.WasPressedThisFrame() && !_baseShooter.IsShooting)
+                _baseShooter.StartShooting(_team);
+            else if (_shootAction.WasReleasedThisFrame() && _baseShooter.IsShooting)
+                _baseShooter.StopShooting();
 
-            if (!_powerfulShootAction.IsPressed() && IsPowerfulShooting)
+            if (!_powerfulShootAction.IsPressed() && _powerfulShooter.IsShooting)
             {
-                StopPowerfulShooting();
+                _powerfulShooter.StopShooting();
 
                 Tween.StopAll(_transform);
 
@@ -98,18 +101,21 @@ namespace StationDefense
             IsActive = true;
 
             if (_shootAction.IsPressed())
-                StartShooting();
+                _baseShooter.StartShooting(_team);
+
+            if (_powerfulShootAction.IsPressed())
+                _powerfulShooter.StartShooting(_team);
         }
 
         public void Deactivate()
         {
             IsActive = false;
 
-            if (IsShooting)
-                StopShooting();
+            if (_baseShooter.IsShooting)
+                _baseShooter.StopShooting();
 
-            if (IsPowerfulShooting)
-                StopPowerfulShooting();
+            if (_powerfulShooter.IsShooting)
+                _powerfulShooter.StopShooting();
 
             Tween.StopAll(_transform);
 
@@ -125,60 +131,6 @@ namespace StationDefense
             mouseDirection.Normalize();
 
             _rotatePointTransform.rotation = Quaternion.FromToRotation(Vector3.up, mouseDirection);
-        }
-
-        private void StartShooting()
-        {
-            _shootCoroutine = StartCoroutine(ShootWithDelay());
-        }
-
-        private void StopShooting()
-        {
-            StopCoroutine(_shootCoroutine);
-            _shootCoroutine = null;
-        }
-
-        private void StartPowerfulShooting()
-        {
-            _powerfulShootCoroutine = StartCoroutine(PowerfulShootWithDelay());
-        }
-
-        private void StopPowerfulShooting()
-        {
-            StopCoroutine(_powerfulShootCoroutine);
-            _powerfulShootCoroutine = null;
-        }
-
-        private void InstantShoot(Ball ballPrefab)
-        {
-            Ball ball = PoolStorage.GetFromPool(ballPrefab.BallName, ballPrefab, _firePointTransform.position,
-                Quaternion.identity);
-
-            ball.Init(_team, _transform.up);
-        }
-
-        private void InstantBasicShoot() => InstantShoot(_ballPrefab);
-
-        private void InstantPowerfulShoot() => InstantShoot(_bigBallPrefab);
-
-        private IEnumerator ShootWithDelay()
-        {
-            while (true)
-            {
-                yield return _shootDelay;
-
-                InstantBasicShoot();
-            }
-        }
-
-        private IEnumerator PowerfulShootWithDelay()
-        {
-            while (true)
-            {
-                yield return _powerfulShootDelay;
-
-                InstantPowerfulShoot();
-            }
         }
     }
 }

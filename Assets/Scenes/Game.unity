@@ -670,7 +670,7 @@ MonoBehaviour:
   _rotatePointTransform: {fileID: 506570229}
   _firePointTransform: {fileID: 281282817}
   _ballPrefab: {fileID: -3529744894406713139, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
-  _canShoot: 0
+  _bigBallPrefab: {fileID: 7679559000431721115, guid: a874e3a8eb5e662478848bb75b7a120d, type: 3}
   _team: 0
 --- !u!1 &272807639
 GameObject:
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   _rotatePointTransform: {fileID: 148617795}
   _firePointTransform: {fileID: 1925334172}
   _ballPrefab: {fileID: -3529744894406713139, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
-  _canShoot: 0
+  _bigBallPrefab: {fileID: 7679559000431721115, guid: a874e3a8eb5e662478848bb75b7a120d, type: 3}
   _team: 1
 --- !u!212 &339624344
 SpriteRenderer:
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   _rotatePointTransform: {fileID: 1670426967}
   _firePointTransform: {fileID: 215958382}
   _ballPrefab: {fileID: -3529744894406713139, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
-  _canShoot: 0
+  _bigBallPrefab: {fileID: 7679559000431721115, guid: a874e3a8eb5e662478848bb75b7a120d, type: 3}
   _team: 2
 --- !u!212 &775541468
 SpriteRenderer:
@@ -2011,7 +2011,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
-  _resetKeyCode: 32
 --- !u!1 &994509874
 GameObject:
   m_ObjectHideFlags: 0
@@ -3413,7 +3412,7 @@ MonoBehaviour:
   _rotatePointTransform: {fileID: 979567867}
   _firePointTransform: {fileID: 634158971}
   _ballPrefab: {fileID: -3529744894406713139, guid: d5ddbd033da32fb408b0a7ad4edc6a5a, type: 3}
-  _canShoot: 0
+  _bigBallPrefab: {fileID: 7679559000431721115, guid: a874e3a8eb5e662478848bb75b7a120d, type: 3}
   _team: 3
 --- !u!212 &1533892769
 SpriteRenderer:

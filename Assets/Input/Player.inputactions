@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "PowerfulShoot",
+                    "type": "Button",
+                    "id": "2128cabc-c674-4c96-843b-89f069abaa45",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ResetCannon",
                     "type": "Button",
                     "id": "4dcc251f-1d70-4962-afba-6f58dc77081a",
@@ -128,6 +137,17 @@
                     "processors": "",
                     "groups": "Desktop",
                     "action": "ResetCannon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d1bbec4-03fd-4e5a-863d-001da03e9e77",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Desktop",
+                    "action": "PowerfulShoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

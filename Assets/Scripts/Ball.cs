@@ -9,10 +9,14 @@ namespace StationDefense
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Mover _mover;
 
+        [SerializeField] private string _ballName;
+
         [SerializeField] private int _baseDamage;
 
         [SerializeField] private int _barrierLayer;
         [SerializeField] private int _enemyLayer;
+
+        public string BallName => _ballName;
 
         public int BaseDamage => _baseDamage;
 
@@ -49,6 +53,6 @@ namespace StationDefense
             _mover.StartMoving();
         }
 
-        private void Disable() => PoolStorage.PutToPool(nameof(Ball), this);
+        private void Disable() => PoolStorage.PutToPool(_ballName, this);
     }
 }

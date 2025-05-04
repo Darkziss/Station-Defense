@@ -57,6 +57,15 @@ namespace StationDefense
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""PowerfulShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""2128cabc-c674-4c96-843b-89f069abaa45"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""ResetCannon"",
                     ""type"": ""Button"",
                     ""id"": ""4dcc251f-1d70-4962-afba-6f58dc77081a"",
@@ -154,6 +163,17 @@ namespace StationDefense
                     ""action"": ""ResetCannon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d1bbec4-03fd-4e5a-863d-001da03e9e77"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Desktop"",
+                    ""action"": ""PowerfulShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -182,6 +202,7 @@ namespace StationDefense
             m_Main_SelectCannon = m_Main.FindAction("SelectCannon", throwIfNotFound: true);
             m_Main_Look = m_Main.FindAction("Look", throwIfNotFound: true);
             m_Main_Shoot = m_Main.FindAction("Shoot", throwIfNotFound: true);
+            m_Main_PowerfulShoot = m_Main.FindAction("PowerfulShoot", throwIfNotFound: true);
             m_Main_ResetCannon = m_Main.FindAction("ResetCannon", throwIfNotFound: true);
         }
 
@@ -247,6 +268,7 @@ namespace StationDefense
         private readonly InputAction m_Main_SelectCannon;
         private readonly InputAction m_Main_Look;
         private readonly InputAction m_Main_Shoot;
+        private readonly InputAction m_Main_PowerfulShoot;
         private readonly InputAction m_Main_ResetCannon;
         public struct MainActions
         {
@@ -255,6 +277,7 @@ namespace StationDefense
             public InputAction @SelectCannon => m_Wrapper.m_Main_SelectCannon;
             public InputAction @Look => m_Wrapper.m_Main_Look;
             public InputAction @Shoot => m_Wrapper.m_Main_Shoot;
+            public InputAction @PowerfulShoot => m_Wrapper.m_Main_PowerfulShoot;
             public InputAction @ResetCannon => m_Wrapper.m_Main_ResetCannon;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
@@ -274,6 +297,9 @@ namespace StationDefense
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @PowerfulShoot.started += instance.OnPowerfulShoot;
+                @PowerfulShoot.performed += instance.OnPowerfulShoot;
+                @PowerfulShoot.canceled += instance.OnPowerfulShoot;
                 @ResetCannon.started += instance.OnResetCannon;
                 @ResetCannon.performed += instance.OnResetCannon;
                 @ResetCannon.canceled += instance.OnResetCannon;
@@ -290,6 +316,9 @@ namespace StationDefense
                 @Shoot.started -= instance.OnShoot;
                 @Shoot.performed -= instance.OnShoot;
                 @Shoot.canceled -= instance.OnShoot;
+                @PowerfulShoot.started -= instance.OnPowerfulShoot;
+                @PowerfulShoot.performed -= instance.OnPowerfulShoot;
+                @PowerfulShoot.canceled -= instance.OnPowerfulShoot;
                 @ResetCannon.started -= instance.OnResetCannon;
                 @ResetCannon.performed -= instance.OnResetCannon;
                 @ResetCannon.canceled -= instance.OnResetCannon;
@@ -324,6 +353,7 @@ namespace StationDefense
             void OnSelectCannon(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
+            void OnPowerfulShoot(InputAction.CallbackContext context);
             void OnResetCannon(InputAction.CallbackContext context);
         }
     }

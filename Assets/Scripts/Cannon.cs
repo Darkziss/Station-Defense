@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using StationDefense.InputSystem;
 using Pooling;
+using PrimeTween;
 
 namespace StationDefense
 {
@@ -16,38 +17,56 @@ namespace StationDefense
         [SerializeField] private Transform _firePointTransform;
 
         [SerializeField] private Ball _ballPrefab;
+        [SerializeField] private Ball _bigBallPrefab;
 
-        [SerializeField] private bool _canShoot;
         [SerializeField] private ColorTeam _team;
 
+        private Vector2 _defaultLocalPosition;
+
         private Coroutine _shootCoroutine;
+        private Coroutine _powerfulShootCoroutine;
 
         private InputAction _lookAction;
+
         private InputAction _shootAction;
+        private InputAction _powerfulShootAction;
 
         private readonly WaitForSeconds _shootDelay = new(0.1f);
+        private readonly WaitForSeconds _powerfulShootDelay = new(1f);
 
         public bool IsActive { get; private set; } = false;
 
         private bool IsShooting => _shootCoroutine != null;
-
-        private const int shootMouseButton = 0;
-
-        private const float fadeDuration = 0.3f;
+        private bool IsPowerfulShooting => _powerfulShootCoroutine != null;
 
         private void OnValidate()
         {
             if (_transform == null)
                 _transform = transform;
+
+            _defaultLocalPosition = _transform.localPosition;
         }
 
         private void Start()
         {
             _lookAction = InputHandler.LookAction;
+            
             _shootAction = InputHandler.ShootAction;
+            _powerfulShootAction = InputHandler.PowerfulShootAction;
 
             _lookAction.Enable();
             _shootAction.Enable();
+            _powerfulShootAction.Enable();
+
+            _powerfulShootAction.performed += (_) =>
+            {
+                if (!IsActive)
+                    return;
+
+                StartPowerfulShooting();
+
+                Tween.ShakeLocalPosition(_transform, Vector3.one * 0.1f, 0.1f, frequency: 10, cycles: -1);
+            };
 
             DeathHandler.GameRestarted += () => _rotatePointTransform.rotation = Quaternion.identity;
         } 
@@ -63,6 +82,15 @@ namespace StationDefense
                 StartShooting();
             else if (_shootAction.WasReleasedThisFrame() && IsShooting)
                 StopShooting();
+
+            if (!_powerfulShootAction.IsPressed() && IsPowerfulShooting)
+            {
+                StopPowerfulShooting();
+
+                Tween.StopAll(_transform);
+
+                _transform.localPosition = _defaultLocalPosition;
+            }
         }
 
         public void Activate()
@@ -79,6 +107,13 @@ namespace StationDefense
 
             if (IsShooting)
                 StopShooting();
+
+            if (IsPowerfulShooting)
+                StopPowerfulShooting();
+
+            Tween.StopAll(_transform);
+
+            _transform.localPosition = _defaultLocalPosition;
         }
 
         private void LookAtMouse()
@@ -103,13 +138,28 @@ namespace StationDefense
             _shootCoroutine = null;
         }
 
-        private void InstantShoot()
+        private void StartPowerfulShooting()
         {
-            Ball ball = PoolStorage.GetFromPool(nameof(Ball), _ballPrefab, _firePointTransform.position,
+            _powerfulShootCoroutine = StartCoroutine(PowerfulShootWithDelay());
+        }
+
+        private void StopPowerfulShooting()
+        {
+            StopCoroutine(_powerfulShootCoroutine);
+            _powerfulShootCoroutine = null;
+        }
+
+        private void InstantShoot(Ball ballPrefab)
+        {
+            Ball ball = PoolStorage.GetFromPool(ballPrefab.BallName, ballPrefab, _firePointTransform.position,
                 Quaternion.identity);
 
             ball.Init(_team, _transform.up);
         }
+
+        private void InstantBasicShoot() => InstantShoot(_ballPrefab);
+
+        private void InstantPowerfulShoot() => InstantShoot(_bigBallPrefab);
 
         private IEnumerator ShootWithDelay()
         {
@@ -117,9 +167,18 @@ namespace StationDefense
             {
                 yield return _shootDelay;
 
-                InstantShoot();
+                InstantBasicShoot();
             }
         }
 
+        private IEnumerator PowerfulShootWithDelay()
+        {
+            while (true)
+            {
+                yield return _powerfulShootDelay;
+
+                InstantPowerfulShoot();
+            }
+        }
     }
 }

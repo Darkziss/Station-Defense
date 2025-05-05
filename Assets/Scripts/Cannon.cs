@@ -5,7 +5,7 @@ using PrimeTween;
 
 namespace StationDefense
 {
-    [RequireComponent(typeof(SpriteRenderer), typeof(CannonShooter))]
+    [RequireComponent(typeof(CannonShooter))]
     public class Cannon : MonoBehaviour
     {
         [SerializeField] private Transform _transform;

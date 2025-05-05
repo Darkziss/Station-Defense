@@ -5,12 +5,13 @@ using PrimeTween;
 
 namespace StationDefense
 {
-    [RequireComponent(typeof(CannonShooter))]
+    [RequireComponent(typeof(SpriteRenderer), typeof(CannonShooter))]
     public class Cannon : MonoBehaviour
     {
-        [SerializeField] private Camera _camera;
-
         [SerializeField] private Transform _transform;
+        [SerializeField] private SpriteRenderer _baseSpriteRenderer;
+
+        [SerializeField] private Camera _camera;
 
         [SerializeField] private CannonShooter _baseShooter;
         [SerializeField] private CannonShooter _powerfulShooter;
@@ -21,6 +22,9 @@ namespace StationDefense
         [SerializeField] private float _powerfulShootDelay = 1.5f;
 
         [SerializeField] private ColorTeam _team;
+
+        [SerializeField] private Color32 _deactivatedColor;
+        [SerializeField] private Color32 _activatedColor;
 
         private Vector2 _defaultLocalPosition;
 
@@ -49,6 +53,8 @@ namespace StationDefense
 
         private void Start()
         {
+            _baseSpriteRenderer.color = _deactivatedColor;
+            
             _lookAction = InputHandler.LookAction;
             
             _shootAction = InputHandler.ShootAction;
@@ -100,6 +106,8 @@ namespace StationDefense
         {
             IsActive = true;
 
+            _baseSpriteRenderer.color = _activatedColor;
+
             if (_shootAction.IsPressed())
                 _baseShooter.StartShooting(_team);
 
@@ -109,12 +117,13 @@ namespace StationDefense
 
                 Tween.ShakeLocalPosition(_transform, _cannonShakeSettings);
             }
-
         }
 
         public void Deactivate()
         {
             IsActive = false;
+
+            _baseSpriteRenderer.color = _deactivatedColor;
 
             if (_baseShooter.IsShooting)
                 _baseShooter.StopShooting();

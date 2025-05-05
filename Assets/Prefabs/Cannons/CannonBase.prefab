@@ -247,14 +247,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e080082ebde99449f2b6add9a6ffb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
   _transform: {fileID: 505562667711922352}
+  _baseSpriteRenderer: {fileID: 6444613932504132718}
+  _camera: {fileID: 0}
   _baseShooter: {fileID: 4615863412280062304}
   _powerfulShooter: {fileID: 160025998185101299}
   _rotatePointTransform: {fileID: 3798683512424233507}
   _baseShootDelay: 0.1
   _powerfulShootDelay: 1
   _team: 0
+  _deactivatedColor:
+    serializedVersion: 2
+    rgba: 4287598479
+  _activatedColor:
+    serializedVersion: 2
+    rgba: 4294967295
 --- !u!1 &8313823253804243523
 GameObject:
   m_ObjectHideFlags: 0

@@ -253,7 +253,7 @@ MonoBehaviour:
   _powerfulShooter: {fileID: 160025998185101299}
   _rotatePointTransform: {fileID: 3798683512424233507}
   _baseShootDelay: 0.1
-  _powerfulShootDelay: 1.5
+  _powerfulShootDelay: 1
   _team: 0
 --- !u!1 &8313823253804243523
 GameObject:

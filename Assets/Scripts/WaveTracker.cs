@@ -16,10 +16,11 @@ namespace StationDefense
         private readonly MutableWaitForSeconds _waveDuration = new();
         private readonly WaitForSeconds _waveCooldown = new(10f);
 
-        private const float defaultWaveDuration = 5f;
+        private const float defaultWaveDuration = 10f;
 
         private const float waveDurationIncrement = 3f;
 
+        public event Action<int> FirstWaveStarted;
         public event Action<int> NewWaveStarted;
         public event Action<int> WaveEnded;
 
@@ -31,7 +32,7 @@ namespace StationDefense
 
             _waveCycleCoroutine = StartCoroutine(WaveCycle());
 
-            NewWaveStarted?.Invoke(_currentWave);
+            FirstWaveStarted?.Invoke(_currentWave);
         }
 
         public void StopWaveCycle()

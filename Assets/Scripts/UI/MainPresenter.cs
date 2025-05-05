@@ -25,6 +25,7 @@ namespace StationDefense.UI
             
             _base.HealthChanged += SetHealthText;
 
+            _waveTracker.FirstWaveStarted += SetWaveText;
             _waveTracker.NewWaveStarted += SetWaveText;
             _waveTracker.WaveEnded += SetWaveEndedText;
 
@@ -38,9 +39,9 @@ namespace StationDefense.UI
             };
         }
 
-        private void SetScoreText(int score)
+        private void SetScoreText(int score, int quota)
         {
-            _scoreText.text = $"Score: {score}";
+            _scoreText.text = $"Score: {score}/{quota}";
         }
 
         private void SetHealthText(int health)

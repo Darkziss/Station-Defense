@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 187974830}
   - component: {fileID: 187974832}
   m_Layer: 7
-  m_Name: Barrier
+  m_Name: Barrier1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -452,12 +452,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187974829}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 7, z: 0}
   m_LocalScale: {x: 20, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 955112023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &187974832
 BoxCollider2D:
@@ -527,7 +527,7 @@ GameObject:
   - component: {fileID: 272807640}
   - component: {fileID: 272807642}
   m_Layer: 7
-  m_Name: Barrier (2)
+  m_Name: Barrier3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -593,12 +593,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272807639}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 11, y: 0, z: 0}
   m_LocalScale: {x: 18, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 955112023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!61 &272807642
 BoxCollider2D:
@@ -1453,6 +1453,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1111137043846420095, guid: 14ec5bb8c387f9e49bedbec8bcbf317d, type: 3}
   m_PrefabInstance: {fileID: 8939311644490365257}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &955112022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 955112023}
+  m_Layer: 0
+  m_Name: Barriers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &955112023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955112022}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 187974831}
+  - {fileID: 1512765106}
+  - {fileID: 272807641}
+  - {fileID: 1227841522}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &993123481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,7 +2230,7 @@ GameObject:
   - component: {fileID: 1227841521}
   - component: {fileID: 1227841523}
   m_Layer: 7
-  m_Name: Barrier (3)
+  m_Name: Barrier4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2261,12 +2296,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227841520}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -11, y: 0, z: 0}
   m_LocalScale: {x: 18, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 955112023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!61 &1227841523
 BoxCollider2D:
@@ -2720,7 +2755,7 @@ GameObject:
   - component: {fileID: 1512765105}
   - component: {fileID: 1512765107}
   m_Layer: 7
-  m_Name: Barrier (1)
+  m_Name: Barrier2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2786,12 +2821,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512765104}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -7, z: 0}
   m_LocalScale: {x: 20, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 955112023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1512765107
 BoxCollider2D:
@@ -3531,10 +3566,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 1838563398}
-  - {fileID: 187974831}
-  - {fileID: 1512765106}
-  - {fileID: 272807641}
-  - {fileID: 1227841522}
+  - {fileID: 955112023}
   - {fileID: 111375290}
   - {fileID: 869914539}
   - {fileID: 1336661313}

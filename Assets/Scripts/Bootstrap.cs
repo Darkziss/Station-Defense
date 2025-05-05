@@ -17,6 +17,7 @@ namespace StationDefense
         [SerializeField] private MainPresenter _mainPresenter;
 
         [SerializeField] private DeathHandler _deathHandler;
+        [SerializeField] private ScoreTracker _scoreTracker;
 
         [SerializeField] private CannonSelector _cannonSelector;
         [SerializeField] private Base _base;
@@ -37,6 +38,8 @@ namespace StationDefense
             _mainPresenter.Init();
 
             _deathHandler.Init();
+
+            _scoreTracker.Init();
 
             _cannonSelector.Init(_cannons, _cannonBases);
             _base.Init();

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Pooling;
 using PrimeTween;
@@ -24,6 +25,8 @@ namespace StationDefense
         public ColorTeam Team { get; private set; }
 
         private const float fadeDuration = 0.5f;
+
+        public static event Action<bool> EnemyHit;
 
         private void OnValidate()
         {
@@ -75,12 +78,16 @@ namespace StationDefense
             {
                 Ball ball = collision.gameObject.GetComponent<Ball>();
 
-                int desiredDamage = ball.Team == Team ? ball.ColorDamage : ball.BaseDamage;
+                bool isSameTeam = ball.Team == Team;
+
+                int desiredDamage = isSameTeam ? ball.ColorDamage : ball.BaseDamage;
 
                 _health.ChangeHealth(-desiredDamage);
 
                 if (_health.IsHealthAtZero)
                     Disable(true);
+
+                EnemyHit?.Invoke(isSameTeam);
             }
 
             if (collision.gameObject.layer == _baseLayer)

@@ -104,7 +104,12 @@ namespace StationDefense
                 _baseShooter.StartShooting(_team);
 
             if (_powerfulShootAction.IsPressed())
+            {
                 _powerfulShooter.StartShooting(_team);
+
+                Tween.ShakeLocalPosition(_transform, _cannonShakeSettings);
+            }
+
         }
 
         public void Deactivate()

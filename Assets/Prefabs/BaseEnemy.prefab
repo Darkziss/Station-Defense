@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 6738668549455112003}
   - component: {fileID: 6936803296139641581}
   - component: {fileID: 3327669093364158353}
-  - component: {fileID: 347505439646770738}
   - component: {fileID: -5390150225864597393}
-  - component: {fileID: 7246735978007310398}
+  - component: {fileID: 2049005954639232191}
+  - component: {fileID: 6216944160205406261}
+  - component: {fileID: 5329358005631241448}
   m_Layer: 8
-  m_Name: Enemy
+  m_Name: BaseEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +162,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &347505439646770738
+--- !u!114 &-5390150225864597393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626873259584987629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a538338d5c4a5844bc01bad1ea71629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 0
+  _maxHealth: 10
+--- !u!114 &2049005954639232191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,21 +193,7 @@ MonoBehaviour:
   _isMoving: 0
   _moveSpeed: 1
   _attackMoveSpeed: 0.5
---- !u!114 &-5390150225864597393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5626873259584987629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a538338d5c4a5844bc01bad1ea71629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHealth: 0
-  _maxHealth: 10
---- !u!114 &7246735978007310398
+--- !u!114 &6216944160205406261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,9 +207,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 6738668549455112003}
   _boxCollider: {fileID: 3327669093364158353}
-  _mover: {fileID: 0}
-  _baseEnemyMover: {fileID: 347505439646770738}
   _health: {fileID: -5390150225864597393}
-  _enemyName: BaseEnemy
+  _enemyAnimator: {fileID: 5329358005631241448}
   _ballLayer: 6
   _baseLayer: 9
+  _baseEnemyMover: {fileID: 2049005954639232191}
+--- !u!114 &5329358005631241448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626873259584987629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224411ee00c9977408dcb660c2df53cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 6738668549455112003}

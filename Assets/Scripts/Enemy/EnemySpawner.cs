@@ -6,9 +6,9 @@ namespace StationDefense
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private Enemy _enemyPrefab;
-        [SerializeField] private Enemy _fastEnemyPrefab;
-        [SerializeField] private Enemy _strongEnemyPrefab;
+        [SerializeField] private BaseEnemy _enemyPrefab;
+        [SerializeField] private BaseEnemy _fastEnemyPrefab;
+        [SerializeField] private BaseEnemy _strongEnemyPrefab;
 
         [SerializeField] private bool _shouldSpawn = false;
 
@@ -48,11 +48,11 @@ namespace StationDefense
             {
                 yield return _spawnDelay;
 
-                Enemy enemyPrefab = _enemyPrefab; //GetRandomEnemy();
+                BaseEnemy enemyPrefab = _enemyPrefab; //GetRandomEnemy();
                 Vector3 position = GetRandomPosition();
                 ColorTeam team = GetRandomTeam();
 
-                Enemy enemy = PoolStorage.GetFromPool(enemyPrefab.EnemyName, enemyPrefab, position,
+                BaseEnemy enemy = PoolStorage.GetFromPool(enemyPrefab.EnemyName, enemyPrefab, position,
                     Quaternion.identity);
                 
                 enemy.Init(team);
@@ -61,7 +61,7 @@ namespace StationDefense
 
         private static bool GetRandomBool() => Random.Range(0, 2) != 0;
 
-        private Enemy GetRandomEnemy()
+        private BaseEnemy GetRandomEnemy()
         {
             int enemyType = Random.Range(1, 4);
 

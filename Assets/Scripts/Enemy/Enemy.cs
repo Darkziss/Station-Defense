@@ -1,117 +1,105 @@
 using System;
 using UnityEngine;
+using StationDefense;
 using Pooling;
-using PrimeTween;
 
-namespace StationDefense
+[RequireComponent(typeof(BoxCollider2D), typeof(Health), typeof(EnemyAnimator))]
+public abstract class Enemy : MonoBehaviour
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(BaseEnemyMover), typeof(Health))]
-    public class Enemy : MonoBehaviour
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private BoxCollider2D _boxCollider;
+
+    [SerializeField] private Health _health;
+
+    [SerializeField] private EnemyAnimator _enemyAnimator;
+
+    [SerializeField] private int _ballLayer;
+    [SerializeField] private int _baseLayer;
+
+    public abstract string EnemyName { get; }
+
+    public ColorTeam Team { get; private set; }
+
+    public static event Action<bool> EnemyHit;
+
+    protected virtual void OnValidate()
     {
-        [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private BoxCollider2D _boxCollider;
+        if (_spriteRenderer == null)
+            _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        [SerializeField] private BaseEnemyMover _baseEnemyMover;
+        if (_boxCollider == null)
+            _boxCollider = GetComponent<BoxCollider2D>();
 
-        [SerializeField] private Health _health;
+        if (_health == null)
+            _health = GetComponent<Health>();
 
-        [SerializeField] private string _enemyName;
+        if (_enemyAnimator == null)
+            _enemyAnimator = GetComponent<EnemyAnimator>();
+    }
 
-        [SerializeField] private int _ballLayer;
-        [SerializeField] private int _baseLayer;
+    private void Start()
+    {
+        DeathHandler.GameRestarted += InstantDisable;
+    }
 
-        public string EnemyName => _enemyName;
+    private void OnEnable()
+    {
+        _health.RestoreHealth();
 
-        public ColorTeam Team { get; private set; }
+        _boxCollider.enabled = true;
 
-        private const float fadeDuration = 0.5f;
+        _enemyAnimator.ResetAll();
+    }
 
-        public static event Action<bool> EnemyHit;
+    public virtual void Init(ColorTeam team)
+    {
+        Team = team;
 
-        private void OnValidate()
+        _spriteRenderer.color = TeamColorStorage.GetByTeam(team);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        int layer = collision.gameObject.layer;
+
+        if (layer == _ballLayer)
         {
-            if (_spriteRenderer == null)
-                _spriteRenderer = GetComponent<SpriteRenderer>();
+            Ball ball = collision.gameObject.GetComponent<Ball>();
 
-            if (_boxCollider == null)
-                _boxCollider = GetComponent<BoxCollider2D>();
+            bool isSameTeam = ball.Team == Team;
 
-            if (_baseEnemyMover)
-                _baseEnemyMover = GetComponent<BaseEnemyMover>();
+            int desiredDamage = isSameTeam ? ball.ColorDamage : ball.BaseDamage;
 
-            if (_health == null)
-                _health = GetComponent<Health>();
+            _health.ChangeHealth(-desiredDamage);
+
+            if (_health.IsHealthAtZero)
+                DisableWithAnimation();
+
+            EnemyHit?.Invoke(isSameTeam);
         }
-
-        private void Start()
+        else if (layer == _baseLayer)
         {
-            DeathHandler.GameRestarted += () => Disable(false);
-        }
-
-        private void OnEnable()
-        {
-            if (_spriteRenderer.color.a < 1f)
-            {
-                Color color = _spriteRenderer.color;
-                color.a = 1f;
-
-                _spriteRenderer.color = color;
-            }
-
-            _boxCollider.enabled = true;
-
-            _health.RestoreHealth();
-        }
-
-        public void Init(ColorTeam team)
-        {
-            Team = team;
-
-            _spriteRenderer.color = TeamColorStorage.GetByTeam(team);
-
-            _baseEnemyMover.StartMoving();
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.layer == _ballLayer)
-            {
-                Ball ball = collision.gameObject.GetComponent<Ball>();
-
-                bool isSameTeam = ball.Team == Team;
-
-                int desiredDamage = isSameTeam ? ball.ColorDamage : ball.BaseDamage;
-
-                _health.ChangeHealth(-desiredDamage);
-
-                if (_health.IsHealthAtZero)
-                    Disable(true);
-
-                EnemyHit?.Invoke(isSameTeam);
-            }
-
-            if (collision.gameObject.layer == _baseLayer)
-                Disable(true);
-        }
-
-        private void Disable(bool playAnimation)
-        {
-            void PutToPool() => PoolStorage.PutToPool(_enemyName, this);
-
-            _boxCollider.enabled = false;
-
-            _baseEnemyMover.StopMoving();
-            _baseEnemyMover.StopAttack();
-
-            if (playAnimation)
-            {
-                Tween.Alpha(_spriteRenderer, 0f, fadeDuration)
-                    .OnComplete(PutToPool);
-            }
-            else
-            {
-                PutToPool();
-            }
+            InstantDisable();
         }
     }
+
+    protected virtual void StopAction()
+    {
+        _boxCollider.enabled = false;
+    }
+
+    private void InstantDisable()
+    {
+        StopAction();
+        PutToPool();
+    }
+
+    private void DisableWithAnimation()
+    {
+        StopAction();
+
+        _enemyAnimator.PlayDisableAnimation(PutToPool);
+    }
+
+    private void PutToPool() => PoolStorage.PutToPool(EnemyName, this);
 }

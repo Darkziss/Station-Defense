@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7941851549012414149}
   - component: {fileID: 2288437854234248260}
   - component: {fileID: 5093141828287509748}
-  - component: {fileID: 1720057489985665847}
-  - component: {fileID: 3895438474054342534}
-  - component: {fileID: 6566398172999008713}
+  - component: {fileID: 3642167077764565664}
+  - component: {fileID: 4009665024084703023}
+  - component: {fileID: -493935862947105815}
+  - component: {fileID: 4418480584003810631}
   m_Layer: 8
   m_Name: FastEnemy
   m_TagString: Untagged
@@ -161,7 +162,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1720057489985665847
+--- !u!114 &3642167077764565664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3126381620572171585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a538338d5c4a5844bc01bad1ea71629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 0
+  _maxHealth: 10
+--- !u!114 &4009665024084703023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,7 +191,7 @@ MonoBehaviour:
   _transform: {fileID: 6833815995572449510}
   _isMoving: 0
   moveSpeed: 3
---- !u!114 &3895438474054342534
+--- !u!114 &-493935862947105815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,27 +200,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3126381620572171585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a538338d5c4a5844bc01bad1ea71629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHealth: 0
-  _maxHealth: 4
---- !u!114 &6566398172999008713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3126381620572171585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6722aa9ef0b3da4c93add7b560d0964, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cdd58f63d38dbf42817705217dbeb72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 7941851549012414149}
   _boxCollider: {fileID: 5093141828287509748}
-  _mover: {fileID: 1720057489985665847}
-  _health: {fileID: 3895438474054342534}
-  _enemyName: FastEnemy
+  _health: {fileID: 3642167077764565664}
+  _enemyAnimator: {fileID: 4418480584003810631}
   _ballLayer: 6
   _baseLayer: 9
+  _targetMover: {fileID: 4009665024084703023}
+--- !u!114 &4418480584003810631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3126381620572171585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224411ee00c9977408dcb660c2df53cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 7941851549012414149}

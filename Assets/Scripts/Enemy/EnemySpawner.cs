@@ -48,7 +48,7 @@ namespace StationDefense
             {
                 yield return _spawnDelay;
 
-                Enemy enemyPrefab = GetRandomEnemy();
+                Enemy enemyPrefab = _enemyPrefab; //GetRandomEnemy();
                 Vector3 position = GetRandomPosition();
                 ColorTeam team = GetRandomTeam();
 

@@ -5,13 +5,13 @@ using PrimeTween;
 
 namespace StationDefense
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(TargetMover), typeof(Health))]
+    [RequireComponent(typeof(BoxCollider2D), typeof(BaseEnemyMover), typeof(Health))]
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BoxCollider2D _boxCollider;
-        
-        [SerializeField] private TargetMover _mover;
+
+        [SerializeField] private BaseEnemyMover _baseEnemyMover;
 
         [SerializeField] private Health _health;
 
@@ -36,8 +36,8 @@ namespace StationDefense
             if (_boxCollider == null)
                 _boxCollider = GetComponent<BoxCollider2D>();
 
-            if (_mover == null)
-                _mover = GetComponent<TargetMover>();
+            if (_baseEnemyMover)
+                _baseEnemyMover = GetComponent<BaseEnemyMover>();
 
             if (_health == null)
                 _health = GetComponent<Health>();
@@ -69,7 +69,7 @@ namespace StationDefense
 
             _spriteRenderer.color = TeamColorStorage.GetByTeam(team);
 
-            _mover.StartMoving();
+            _baseEnemyMover.StartMoving();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -100,7 +100,8 @@ namespace StationDefense
 
             _boxCollider.enabled = false;
 
-            _mover.StopMoving();
+            _baseEnemyMover.StopMoving();
+            _baseEnemyMover.StopAttack();
 
             if (playAnimation)
             {

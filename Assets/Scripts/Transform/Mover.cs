@@ -11,6 +11,8 @@ namespace StationDefense
         [SerializeField, Min(0f)] private float _moveSpeed = 1f;
         [SerializeField] private Vector3 _moveDirection;
 
+        [SerializeField] private Space _moveSpace = Space.World;
+
         public bool IsMoving => _isMoving;
 
         private void OnValidate()
@@ -28,7 +30,7 @@ namespace StationDefense
 
             Vector3 translate = _moveSpeed * Time.deltaTime * _moveDirection;
 
-            _transform.Translate(translate);
+            _transform.Translate(translate, _moveSpace);
         }
 
         public void SetMoveDirection(Vector3 direction) => _moveDirection = direction.normalized;

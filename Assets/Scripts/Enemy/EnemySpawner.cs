@@ -8,7 +8,7 @@ namespace StationDefense
     {
         [SerializeField] private BaseEnemy _enemyPrefab;
         [SerializeField] private FastEnemy _fastEnemyPrefab;
-        [SerializeField] private BaseEnemy _strongEnemyPrefab;
+        [SerializeField] private BigEnemy _strongEnemyPrefab;
 
         [SerializeField] private bool _shouldSpawn = false;
 
@@ -63,7 +63,7 @@ namespace StationDefense
 
         private Enemy GetRandomEnemy()
         {
-            int enemyType = Random.Range(1, 3);
+            int enemyType = Random.Range(1, 4);
 
             return enemyType switch
             {

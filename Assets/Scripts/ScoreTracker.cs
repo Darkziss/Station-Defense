@@ -16,7 +16,7 @@ namespace StationDefense
         private const int scoreDecrement = -50;
 
         private const int defaultQuota = 100;
-        private const int quotaIncrement = 300;
+        private const int quotaIncrement = 100;
 
         public event Action<int, int> ScoreChanged;
 

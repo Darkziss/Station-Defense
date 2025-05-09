@@ -2967,7 +2967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 6216944160205406261, guid: fd02fae39eec2704e9ffc8fab06888f2, type: 3}
   _fastEnemyPrefab: {fileID: -493935862947105815, guid: 9705059ad898d6e43918daec0f10aba7, type: 3}
-  _strongEnemyPrefab: {fileID: 5062163126213795434, guid: 897032f100b084d4ab85406ccc1139fb, type: 3}
+  _strongEnemyPrefab: {fileID: 6431231410805223651, guid: 897032f100b084d4ab85406ccc1139fb, type: 3}
   _shouldSpawn: 0
 --- !u!1 &1838563397
 GameObject:

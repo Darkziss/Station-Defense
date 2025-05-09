@@ -15,6 +15,8 @@ namespace StationDefense
         [SerializeField, Min(0f)] private float _moveSpeed = 1f;
         [SerializeField, Min(0f)] private float _attackMoveSpeed = 0.5f;
 
+        [SerializeField] private float _attackDistance = 5f;
+
         private bool _isAttacking = false;
 
         private Coroutine _changeDirectionCoroutine;
@@ -22,17 +24,21 @@ namespace StationDefense
 
         private Vector2 _moveDirection;
 
+        private WaitForSeconds _shootDelay;
+
         private readonly Vector3 _targetPosition = Vector3.zero;
 
         private readonly WaitForSeconds _changeDirectionDelay = new(0.5f);
-        private readonly WaitForSeconds _shootDelay = new(1.5f);
-
-        private const float minDistance = 5f;
 
         private void OnValidate()
         {
             if (_transform == null)
                 _transform = transform;
+        }
+
+        public void Init(float shootDelay)
+        {
+            _shootDelay = new(shootDelay);
         }
 
         private void Update()
@@ -50,7 +56,7 @@ namespace StationDefense
             {
                 float distance = Vector2.Distance(_transform.position, _targetPosition);
 
-                if (distance > minDistance)
+                if (distance > _attackDistance)
                 {
                     _transform.position = Vector2.MoveTowards(_transform.position, _targetPosition,
                         _moveSpeed * Time.deltaTime);

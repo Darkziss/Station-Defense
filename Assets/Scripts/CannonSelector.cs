@@ -10,6 +10,8 @@ namespace StationDefense
     public class CannonSelector : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
+
+        [SerializeField] private Shield _shield;
         
         private Vector2Int _selectedKey;
         private Cannon _selectedCannon;
@@ -19,6 +21,8 @@ namespace StationDefense
 
         private readonly Dictionary<Vector2Int, Cannon> _cannons = new(cannonCount);
         private readonly Dictionary<Vector2Int, Transform> _cannonBases = new(cannonCount);
+
+        private readonly Dictionary<Vector2Int, ColorTeam> _teams = new(cannonCount);
 
         private readonly Vector2Int _defaultSelectedKey = Vector2Int.zero;
 
@@ -44,6 +48,9 @@ namespace StationDefense
             {
                 _cannons.Add(keys[i], cannons[i]);
                 _cannonBases.Add(keys[i], cannonBases[i]);
+
+                ColorTeam team = (ColorTeam)i;
+                _teams.Add(keys[i], team);
             }
 
             _selectCannonAction = InputHandler.SelectCannonAction;
@@ -77,6 +84,8 @@ namespace StationDefense
 
                 _selectedCannon.Activate();
 
+                _shield.ChangeDefenseTeam(_teams[key]);
+
                 MoveCameraToPosition(_cannonBases[key].position, true);
             }
 
@@ -92,6 +101,8 @@ namespace StationDefense
             _selectedKey = _defaultSelectedKey;
             _selectedCannon = null;
 
+            _shield.ChangeDefenseTeam(ColorTeam.None);
+
             MoveCameraToPosition(Vector2.zero, false);
         }
 
@@ -101,6 +112,8 @@ namespace StationDefense
 
             _selectedKey = _defaultSelectedKey;
             _selectedCannon = null;
+
+            _shield.ChangeDefenseTeam(ColorTeam.None);
 
             MoveCameraToPosition(Vector2.zero, true);
         }

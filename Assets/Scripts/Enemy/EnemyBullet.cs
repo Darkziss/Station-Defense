@@ -3,17 +3,24 @@ using Pooling;
 
 namespace StationDefense
 {
-    [RequireComponent(typeof(BoxCollider2D), typeof(Mover))]
+    [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D), typeof(Mover))]
     public class EnemyBullet : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+
         [SerializeField] private Mover _mover;
 
         [SerializeField] private string _bulletName;
 
         public string BulletName => _bulletName;
 
+        public ColorTeam Team { get; private set; }
+
         private void OnValidate()
         {
+            if (_spriteRenderer == null)
+                _spriteRenderer = GetComponent<SpriteRenderer>();
+
             if (_mover == null)
                 _mover = GetComponent<Mover>();
         }
@@ -23,12 +30,16 @@ namespace StationDefense
             Disable();
         }
 
-        public void Init(Vector2 moveDirection)
+        public void Init(ColorTeam team, Vector2 moveDirection)
         {
+            Team = team;
+
+            _spriteRenderer.color = TeamColorStorage.GetByTeam(team);
+
             _mover.SetMoveDirection(moveDirection);
             _mover.StartMoving();
         }
 
-        private void Disable() => PoolStorage.PutToPool(_bulletName, this);
+        public void Disable() => PoolStorage.PutToPool(_bulletName, this);
     }
 }

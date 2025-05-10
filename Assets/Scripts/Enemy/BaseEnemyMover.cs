@@ -17,6 +17,8 @@ namespace StationDefense
 
         [SerializeField] private float _attackDistance = 5f;
 
+        private ColorTeam _team;
+
         private bool _isAttacking = false;
 
         private Coroutine _changeDirectionCoroutine;
@@ -36,8 +38,10 @@ namespace StationDefense
                 _transform = transform;
         }
 
-        public void Init(float shootDelay)
+        public void Init(ColorTeam team, float shootDelay)
         {
+            _team = team;
+
             _shootDelay = new(shootDelay);
         }
 
@@ -133,7 +137,7 @@ namespace StationDefense
                 EnemyBullet bullet = PoolStorage.GetFromPool(_bulletPrefab.BulletName, _bulletPrefab,
                     _transform.position, rotation);
 
-                bullet.Init(shootDirection);
+                bullet.Init(_team, shootDirection);
             }
         }
     }

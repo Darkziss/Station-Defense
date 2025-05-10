@@ -6,6 +6,7 @@ namespace StationDefense
         Red,
         Yellow,
         Green,
-        Blue
+        Blue,
+        None
     }
 }

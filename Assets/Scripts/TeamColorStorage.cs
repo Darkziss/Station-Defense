@@ -10,7 +10,8 @@ namespace StationDefense
             [ColorTeam.Red] = Color.red,
             [ColorTeam.Yellow] = Color.yellow,
             [ColorTeam.Green] = Color.green,
-            [ColorTeam.Blue] = Color.blue
+            [ColorTeam.Blue] = Color.blue,
+            [ColorTeam.None] = Color.black
         };
 
         public static Color32 GetByTeam(ColorTeam team) => _colors[team];

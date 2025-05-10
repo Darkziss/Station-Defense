@@ -13,8 +13,11 @@ namespace StationDefense
 
         [SerializeField] private int _baseDamage;
 
+        [SerializeField] private bool _isDisposable = true;
+
         [SerializeField] private int _barrierLayer;
         [SerializeField] private int _enemyLayer;
+        [SerializeField] private int _enemyBulletLayer;
 
         public string BallName => _ballName;
 
@@ -39,7 +42,8 @@ namespace StationDefense
         {
             int collisionLayer = collision.gameObject.layer;
 
-            if (collisionLayer == _barrierLayer || collisionLayer == _enemyLayer)
+            if (collisionLayer == _barrierLayer || collisionLayer == _enemyLayer 
+                || (collisionLayer == _enemyBulletLayer && _isDisposable))
                 Disable();
         }
 

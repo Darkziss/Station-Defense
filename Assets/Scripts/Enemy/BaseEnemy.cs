@@ -23,7 +23,7 @@ namespace StationDefense
         {
             base.Init(team);
 
-            _baseEnemyMover.Init(_shootDelay);
+            _baseEnemyMover.Init(Team, _shootDelay);
 
             _baseEnemyMover.StartMoving();
         }

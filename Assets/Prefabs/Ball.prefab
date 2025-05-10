@@ -166,6 +166,7 @@ MonoBehaviour:
   _isMoving: 0
   _moveSpeed: 12
   _moveDirection: {x: 0, y: 0, z: 0}
+  _moveSpace: 0
 --- !u!114 &-3529744894406713139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,5 +183,7 @@ MonoBehaviour:
   _mover: {fileID: 2336154029460797410}
   _ballName: Ball
   _baseDamage: 1
+  _isDisposable: 1
   _barrierLayer: 7
   _enemyLayer: 8
+  _enemyBulletLayer: 10

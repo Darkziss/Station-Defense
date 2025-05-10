@@ -39,7 +39,7 @@ namespace StationDefense
 
             _deathHandler.Init();
 
-            _scoreTracker.Init();
+            //_scoreTracker.Init();
 
             _cannonSelector.Init(_cannons, _cannonBases);
             _base.Init();

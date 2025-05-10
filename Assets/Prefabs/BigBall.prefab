@@ -166,6 +166,7 @@ MonoBehaviour:
   _isMoving: 0
   _moveSpeed: 18
   _moveDirection: {x: 0, y: 0, z: 0}
+  _moveSpace: 0
 --- !u!114 &7679559000431721115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,5 +183,7 @@ MonoBehaviour:
   _mover: {fileID: 6743438620102124412}
   _ballName: BigBall
   _baseDamage: 5
+  _isDisposable: 0
   _barrierLayer: 7
   _enemyLayer: 8
+  _enemyBulletLayer: 10

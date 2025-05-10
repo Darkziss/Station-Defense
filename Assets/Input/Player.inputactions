@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CircleShoot",
+                    "type": "Button",
+                    "id": "b2797b48-3693-412b-badb-2d9bf97a9b89",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ResetCannon",
                     "type": "Button",
                     "id": "4dcc251f-1d70-4962-afba-6f58dc77081a",
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "Desktop",
                     "action": "PowerfulShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "199b1af1-6dfa-40c4-a13f-c389c74e111f",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Desktop",
+                    "action": "CircleShoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

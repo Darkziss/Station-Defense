@@ -66,6 +66,15 @@ namespace StationDefense
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""CircleShoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2797b48-3693-412b-badb-2d9bf97a9b89"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""ResetCannon"",
                     ""type"": ""Button"",
                     ""id"": ""4dcc251f-1d70-4962-afba-6f58dc77081a"",
@@ -174,6 +183,17 @@ namespace StationDefense
                     ""action"": ""PowerfulShoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""199b1af1-6dfa-40c4-a13f-c389c74e111f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Desktop"",
+                    ""action"": ""CircleShoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -203,6 +223,7 @@ namespace StationDefense
             m_Main_Look = m_Main.FindAction("Look", throwIfNotFound: true);
             m_Main_Shoot = m_Main.FindAction("Shoot", throwIfNotFound: true);
             m_Main_PowerfulShoot = m_Main.FindAction("PowerfulShoot", throwIfNotFound: true);
+            m_Main_CircleShoot = m_Main.FindAction("CircleShoot", throwIfNotFound: true);
             m_Main_ResetCannon = m_Main.FindAction("ResetCannon", throwIfNotFound: true);
         }
 
@@ -269,6 +290,7 @@ namespace StationDefense
         private readonly InputAction m_Main_Look;
         private readonly InputAction m_Main_Shoot;
         private readonly InputAction m_Main_PowerfulShoot;
+        private readonly InputAction m_Main_CircleShoot;
         private readonly InputAction m_Main_ResetCannon;
         public struct MainActions
         {
@@ -278,6 +300,7 @@ namespace StationDefense
             public InputAction @Look => m_Wrapper.m_Main_Look;
             public InputAction @Shoot => m_Wrapper.m_Main_Shoot;
             public InputAction @PowerfulShoot => m_Wrapper.m_Main_PowerfulShoot;
+            public InputAction @CircleShoot => m_Wrapper.m_Main_CircleShoot;
             public InputAction @ResetCannon => m_Wrapper.m_Main_ResetCannon;
             public InputActionMap Get() { return m_Wrapper.m_Main; }
             public void Enable() { Get().Enable(); }
@@ -300,6 +323,9 @@ namespace StationDefense
                 @PowerfulShoot.started += instance.OnPowerfulShoot;
                 @PowerfulShoot.performed += instance.OnPowerfulShoot;
                 @PowerfulShoot.canceled += instance.OnPowerfulShoot;
+                @CircleShoot.started += instance.OnCircleShoot;
+                @CircleShoot.performed += instance.OnCircleShoot;
+                @CircleShoot.canceled += instance.OnCircleShoot;
                 @ResetCannon.started += instance.OnResetCannon;
                 @ResetCannon.performed += instance.OnResetCannon;
                 @ResetCannon.canceled += instance.OnResetCannon;
@@ -319,6 +345,9 @@ namespace StationDefense
                 @PowerfulShoot.started -= instance.OnPowerfulShoot;
                 @PowerfulShoot.performed -= instance.OnPowerfulShoot;
                 @PowerfulShoot.canceled -= instance.OnPowerfulShoot;
+                @CircleShoot.started -= instance.OnCircleShoot;
+                @CircleShoot.performed -= instance.OnCircleShoot;
+                @CircleShoot.canceled -= instance.OnCircleShoot;
                 @ResetCannon.started -= instance.OnResetCannon;
                 @ResetCannon.performed -= instance.OnResetCannon;
                 @ResetCannon.canceled -= instance.OnResetCannon;
@@ -354,6 +383,7 @@ namespace StationDefense
             void OnLook(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
             void OnPowerfulShoot(InputAction.CallbackContext context);
+            void OnCircleShoot(InputAction.CallbackContext context);
             void OnResetCannon(InputAction.CallbackContext context);
         }
     }

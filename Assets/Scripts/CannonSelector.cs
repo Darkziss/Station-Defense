@@ -1,9 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using StationDefense.InputSystem;
 using PrimeTween;
-using System;
 
 namespace StationDefense
 {
@@ -28,7 +28,9 @@ namespace StationDefense
 
         private readonly TweenSettings _cameraTweenSettings = new(0.5f, Ease.OutCubic);
 
-        private bool HaveSelectedCannon => _selectedCannon != null;
+        public ColorTeam SelectedTeam => _teams[_selectedKey];
+
+        public bool HaveSelectedCannon => _selectedCannon != null;
 
         private const int cannonCount = 4;
 

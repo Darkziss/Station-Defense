@@ -13,6 +13,7 @@ namespace StationDefense.InputSystem
         public static InputAction LookAction { get; private set; }
         public static InputAction ShootAction { get; private set; }
         public static InputAction PowerfulShootAction { get; private set; }
+        public static InputAction CircleShootAction { get; private set; }
 
         private const string actionMapName = "Main";
 
@@ -22,6 +23,7 @@ namespace StationDefense.InputSystem
         private const string lookActionName = "Look";
         private const string shootActionName = "Shoot";
         private const string powerfulShootActionName = "PowerfulShoot";
+        private const string circleShootActionName = "CircleShoot";
 
         public void Init()
         {
@@ -33,6 +35,7 @@ namespace StationDefense.InputSystem
             LookAction = actionMap.FindAction(lookActionName);
             ShootAction = actionMap.FindAction(shootActionName);
             PowerfulShootAction = actionMap.FindAction(powerfulShootActionName);
+            CircleShootAction = actionMap.FindAction(circleShootActionName);
         }
     }
 }

@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Pooling;
 
-public class BaseShooter : MonoBehaviour
+namespace StationDefense
 {
-    // Start is called before the first frame update
-    void Start()
+    public class BaseShooter : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private Transform[] _bulletPoints;
+        [SerializeField] private Vector3[] _directions;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField] private Ball _ballPrefab;
+
+        public void Shoot(ColorTeam team)
+        {
+            for (int i = 0; i < _bulletPoints.Length; i++)
+            {
+                Ball ball = PoolStorage.GetFromPool(_ballPrefab.BallName, _ballPrefab,
+                    _bulletPoints[i].position, Quaternion.identity);
+
+                ball.Init(team, _directions[i]);
+            }
+        }
     }
 }

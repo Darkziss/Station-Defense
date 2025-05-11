@@ -213,7 +213,7 @@ MonoBehaviour:
   _ballLayer: 6
   _baseLayer: 9
   _baseEnemyMover: {fileID: 2049005954639232191}
-  _shootDelay: 1
+  _shootDelay: 0.8
 --- !u!114 &5329358005631241448
 MonoBehaviour:
   m_ObjectHideFlags: 0

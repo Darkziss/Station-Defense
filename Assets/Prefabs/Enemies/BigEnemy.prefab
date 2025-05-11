@@ -193,7 +193,7 @@ MonoBehaviour:
   _isMoving: 0
   _moveSpeed: 0.3
   _attackMoveSpeed: 0.3
-  _attackDistance: 9.5
+  _attackDistance: 8.5
 --- !u!114 &6431231410805223651
 MonoBehaviour:
   m_ObjectHideFlags: 0

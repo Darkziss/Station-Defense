@@ -209,6 +209,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 4418480584003810631}
   _ballLayer: 6
   _baseLayer: 9
+  _circularWaveLayer: 11
   _targetMover: {fileID: 4009665024084703023}
 --- !u!114 &4418480584003810631
 MonoBehaviour:

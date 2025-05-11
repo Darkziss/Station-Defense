@@ -15,6 +15,7 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField] private int _ballLayer;
     [SerializeField] private int _baseLayer;
+    [SerializeField] private int _circularWaveLayer;
 
     public abstract string EnemyName { get; }
 
@@ -76,6 +77,15 @@ public abstract class Enemy : MonoBehaviour
                 DisableWithAnimation();
 
             EnemyHit?.Invoke(isSameTeam);
+        }
+        else if (layer == _circularWaveLayer)
+        {
+            CircularWave wave = collision.gameObject.GetComponent<CircularWave>();
+
+            _health.ChangeHealth(-wave.Damage);
+
+            if (_health.IsHealthAtZero)
+                DisableWithAnimation();
         }
         else if (layer == _baseLayer)
         {

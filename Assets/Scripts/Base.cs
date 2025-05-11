@@ -5,12 +5,10 @@ using StationDefense.InputSystem;
 
 namespace StationDefense
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(BaseShooter))]
+    [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
     public class Base : MonoBehaviour
     {
-        [SerializeField] private CannonSelector _cannonSelector;
-        
-        [SerializeField] private BaseShooter _baseShooter;
+        [SerializeField] private CircularWave _circularWave;
 
         [SerializeField] private int _health = 0;
         [SerializeField] private int _maxHealth = 10;
@@ -25,12 +23,6 @@ namespace StationDefense
 
         public event Action<int> HealthChanged;
         public event Action BaseDied;
-
-        private void OnValidate()
-        {
-            if (_baseShooter == null)
-                _baseShooter = GetComponent<BaseShooter>();
-        }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -66,12 +58,10 @@ namespace StationDefense
 
         private void CircleShoot()
         {
-            if (!_cannonSelector.HaveSelectedCannon || IsDead)
+            if (_circularWave.IsExpanding || IsDead)
                 return;
 
-            ColorTeam team = _cannonSelector.SelectedTeam;
-
-            _baseShooter.Shoot(team);
+            _circularWave.StartExpand();
         }
     }
 }

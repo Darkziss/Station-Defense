@@ -212,6 +212,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 1667497463833891860}
   _ballLayer: 6
   _baseLayer: 9
+  _circularWaveLayer: 11
   _baseEnemyMover: {fileID: 8574994692444443875}
   _shootDelay: 0.25
 --- !u!114 &1667497463833891860

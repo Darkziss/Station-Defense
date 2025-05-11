@@ -123,22 +123,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: StrokeSquare
+      name: Main_0
       rect:
         serializedVersion: 2
-        x: 106
-        y: 1686
-        width: 238
-        height: 238
+        x: 113
+        y: 1422
+        width: 513
+        height: 513
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cd7f91857201c24cb68aefe95629cc6
-      internalID: -333581430
+      spriteID: f9f632dfefc798d4786da68a28db72a0
+      internalID: -629574220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Main_1
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 1445
+        width: 492
+        height: 491
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91807bc866c8585499a8ce8f5df08ecb
+      internalID: 371487251
       vertices: []
       indices: 
       edges: []
@@ -154,7 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      StrokeSquare: -333581430
+      Main_0: -629574220
+      Main_1: 371487251
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -73,8 +73,6 @@ namespace StationDefense
                     return;
 
                 _powerfulShooter.StartShooting(_team);
-
-                Tween.ShakeLocalPosition(_transform, _cannonShakeSettings);
             };
 
             DeathHandler.GameRestarted += () => _rotatePointTransform.rotation = Quaternion.identity;
@@ -88,15 +86,21 @@ namespace StationDefense
             LookAtMouse();
 
             if (_shootAction.WasPressedThisFrame() && !_baseShooter.IsShooting)
+            {
                 _baseShooter.StartShooting(_team);
+
+                Tween.ShakeLocalPosition(_transform, _cannonShakeSettings);
+            }
             else if (_shootAction.WasReleasedThisFrame() && _baseShooter.IsShooting)
+            {
                 _baseShooter.StopShooting();
+
+                Tween.StopAll(_transform);
+            }
 
             if (!_powerfulShootAction.IsPressed() && _powerfulShooter.IsShooting)
             {
                 _powerfulShooter.StopShooting();
-
-                Tween.StopAll(_transform);
 
                 _transform.localPosition = _defaultLocalPosition;
             }
@@ -109,13 +113,15 @@ namespace StationDefense
             _baseSpriteRenderer.color = _activatedColor;
 
             if (_shootAction.IsPressed())
+            {
                 _baseShooter.StartShooting(_team);
+
+                Tween.ShakeLocalPosition(_transform, _cannonShakeSettings);
+            }
 
             if (_powerfulShootAction.IsPressed())
             {
                 _powerfulShooter.StartShooting(_team);
-
-                Tween.ShakeLocalPosition(_transform, _cannonShakeSettings);
             }
         }
 
@@ -126,12 +132,16 @@ namespace StationDefense
             _baseSpriteRenderer.color = _deactivatedColor;
 
             if (_baseShooter.IsShooting)
+            {
                 _baseShooter.StopShooting();
 
-            if (_powerfulShooter.IsShooting)
-                _powerfulShooter.StopShooting();
+                Tween.StopAll(_transform);
+            }
 
-            Tween.StopAll(_transform);
+            if (_powerfulShooter.IsShooting)
+            {
+                _powerfulShooter.StopShooting();
+            }
 
             _transform.localPosition = _defaultLocalPosition;
         }

@@ -4,7 +4,7 @@ using PrimeTween;
 
 namespace StationDefense
 {
-    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(SpriteRenderer), typeof(CircleCollider2D))]
     public class CircularWave : MonoBehaviour
     {
         [SerializeField] private int _damage;
@@ -14,6 +14,7 @@ namespace StationDefense
         private Transform _transform;
 
         private SpriteRenderer _spriteRenderer;
+        private CircleCollider2D _collider;
 
         private readonly Vector3 _startScale = Vector3.one * 0.1f;
         private readonly Vector3 _desiredScale = Vector3.one * 5f;
@@ -37,6 +38,9 @@ namespace StationDefense
 
             if (_spriteRenderer == null)
                 _spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (_collider == null)
+                _collider = GetComponent<CircleCollider2D>();
         }
 
         public void StartExpand()
@@ -47,19 +51,22 @@ namespace StationDefense
             IsExpanding = true;
 
             _spriteRenderer.color = _defaultColor;
+            _collider.enabled = true;
 
             gameObject.SetActive(true);
 
-            Tween.Scale(_transform, _startScale, _desiredScale, scaleDuration, scaleEase)
-                .OnComplete(Disable);
+            Sequence.Create()
+                .Chain(Tween.Scale(_transform, _startScale, _desiredScale, scaleDuration, scaleEase))
+                .ChainCallback(() => _collider.enabled = false)
+                .Chain(Tween.Alpha(_spriteRenderer, _fadeTweenSettings))
+                .ChainCallback(Disable);
         }
 
         private void Disable()
         {
             IsExpanding = false;
 
-            Tween.Alpha(_spriteRenderer, _fadeTweenSettings)
-                .OnComplete(() => gameObject.SetActive(false));
+            gameObject.SetActive(false);
         }
     }
 }

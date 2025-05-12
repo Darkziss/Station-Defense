@@ -40,6 +40,12 @@ namespace StationDefense
             _mover.StartMoving();
         }
 
-        public void Disable() => PoolStorage.PutToPool(_bulletName, this);
+        public void Disable()
+        {
+            if (_mover.IsMoving)
+                _mover.StopMoving();
+
+            PoolStorage.PutToPool(_bulletName, this);
+        }
     }
 }

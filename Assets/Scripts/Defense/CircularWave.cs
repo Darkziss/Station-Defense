@@ -4,22 +4,20 @@ using PrimeTween;
 
 namespace StationDefense
 {
-    [RequireComponent(typeof(SpriteRenderer), typeof(CircleCollider2D))]
+    [RequireComponent(typeof(CircleRenderer), typeof(CircleCollider2D))]
     public class CircularWave : MonoBehaviour
     {
         [SerializeField] private int _damage;
 
-        [SerializeField] private Color32 _defaultColor = Color.black;
-
         private Transform _transform;
 
-        private SpriteRenderer _spriteRenderer;
+        private CircleRenderer _circleRenderer;
         private CircleCollider2D _collider;
 
         private readonly Vector3 _startScale = Vector3.one * 0.1f;
         private readonly Vector3 _desiredScale = Vector3.one * 5f;
 
-        private readonly TweenSettings<float> _fadeTweenSettings = new(0f, fadeDuration, fadeEase);
+        private readonly TweenSettings<float> _fadeTweenSettings = new(1f, 0f, fadeDuration, fadeEase);
 
         public bool IsExpanding { get; private set; } = false;
 
@@ -36,8 +34,8 @@ namespace StationDefense
             if (_transform == null)
                 _transform = transform;
 
-            if (_spriteRenderer == null)
-                _spriteRenderer = GetComponent<SpriteRenderer>();
+            if (_circleRenderer == null)
+                _circleRenderer = GetComponent<CircleRenderer>();
 
             if (_collider == null)
                 _collider = GetComponent<CircleCollider2D>();
@@ -50,7 +48,7 @@ namespace StationDefense
 
             IsExpanding = true;
 
-            _spriteRenderer.color = _defaultColor;
+            _circleRenderer.SetAlpha(1f);
             _collider.enabled = true;
 
             gameObject.SetActive(true);
@@ -58,7 +56,7 @@ namespace StationDefense
             Sequence.Create()
                 .Chain(Tween.Scale(_transform, _startScale, _desiredScale, scaleDuration, scaleEase))
                 .ChainCallback(() => _collider.enabled = false)
-                .Chain(Tween.Alpha(_spriteRenderer, _fadeTweenSettings))
+                .Chain(Tween.Custom(_fadeTweenSettings, _circleRenderer.SetAlpha))
                 .ChainCallback(Disable);
         }
 

@@ -8,7 +8,9 @@ namespace StationDefense
     {
         [SerializeField] private BaseEnemy _enemyPrefab;
         [SerializeField] private FastEnemy _fastEnemyPrefab;
-        [SerializeField] private BigEnemy _strongEnemyPrefab;
+        [SerializeField] private BigEnemy _bigEnemyPrefab;
+
+        [SerializeField] private EnemyGroup[] _groups;
 
         [SerializeField] private bool _shouldSpawn = false;
 
@@ -48,18 +50,56 @@ namespace StationDefense
             {
                 yield return _spawnDelay;
 
-                Enemy enemyPrefab = GetRandomEnemy();
-                Vector3 position = GetRandomPosition();
-                ColorTeam team = GetRandomTeam();
+                bool isGroup = RandomUtility.GetRandomBool();
 
-                Enemy enemy = PoolStorage.GetFromPool(enemyPrefab.EnemyName, enemyPrefab, position,
-                    Quaternion.identity);
-                
-                enemy.Init(team);
+                if (isGroup)
+                    SpawnRandomGroup();
+                else
+                    SpawnRandomEnemy();
             }
         }
 
-        private static bool GetRandomBool() => Random.Range(0, 2) != 0;
+        private void SpawnRandomEnemy()
+        {
+            Enemy prefab = GetRandomEnemy();
+
+            SpawnEnemyByPrefab(prefab);
+        }
+
+        private void SpawnEnemyByPrefab(Enemy prefab)
+        {
+            Vector3 position = GetRandomPosition();
+            ColorTeam team = GetRandomTeam();
+
+            Enemy enemy = PoolStorage.GetFromPool(prefab.EnemyName, prefab, position,
+                Quaternion.identity);
+
+            enemy.Init(team);
+        }
+
+        private void SpawnRandomGroup()
+        {
+            void SpawnMultipleEnemy(Enemy prefab, int spawnCount)
+            {
+                for (int i = 0; i < spawnCount; i++)
+                    SpawnEnemyByPrefab(prefab);
+            }
+            
+            const int min = 0;
+
+            int index = Random.Range(min, _groups.Length);
+
+            EnemyGroup group = _groups[index];
+
+            if (group.BaseEnemyCount > 0)
+                SpawnMultipleEnemy(_enemyPrefab, group.BaseEnemyCount);
+
+            if (group.FastEnemyCount > 0)
+                SpawnMultipleEnemy(_fastEnemyPrefab, group.FastEnemyCount);
+
+            if (group.BigEnemyCount > 0)
+                SpawnMultipleEnemy(_bigEnemyPrefab, group.BigEnemyCount);
+        }
 
         private Enemy GetRandomEnemy()
         {
@@ -69,24 +109,24 @@ namespace StationDefense
             {
                 1 => _enemyPrefab,
                 2 => _fastEnemyPrefab,
-                3 => _strongEnemyPrefab,
+                3 => _bigEnemyPrefab,
                 _ => _enemyPrefab
             };
         }
 
         private static Vector3 GetRandomPosition()
         {
-            bool vertical = GetRandomBool();
+            bool vertical = RandomUtility.GetRandomBool();
             Vector3 position = new();
 
             if (vertical)
             {
                 position.x = Random.Range(minX, maxX);
-                position.y = GetRandomBool() ? minY : maxY;
+                position.y = RandomUtility.GetRandomBool() ? minY : maxY;
             }
             else
             {
-                position.x = GetRandomBool() ? minX : maxX;
+                position.x = RandomUtility.GetRandomBool() ? minX : maxX;
                 position.y = Random.Range(minY, maxY);
             }
 

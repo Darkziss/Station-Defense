@@ -13,34 +13,15 @@ public class CircleRenderer : MonoBehaviour
 
     private const float minWidth = 1f;
 
-    private const int minSegmentCount = 1;
-    private const int maxSegmentCount = 64;
+    private const int minSegmentCount = 4;
+    private const int maxSegmentCount = 128;
 
     private void OnValidate()
     {
         if (_lineRenderer == null)
             _lineRenderer = GetComponent<LineRenderer>();
-    }
 
-    private void Start()
-    {
-        _lineRenderer.positionCount = _segmentCount;
-        _lineRenderer.widthMultiplier = _width;
-
-        float angle = 20f;
-
-        for (int i = 0; i < _segmentCount; i++)
-        {
-            Vector3 position = new()
-            {
-                x = Mathf.Sin(angle * Mathf.Deg2Rad) * _radius,
-                y = Mathf.Cos(angle * Mathf.Deg2Rad) * _radius
-            };
-
-            _lineRenderer.SetPosition(i, position);
-
-            angle += 380f / _segmentCount;
-        }
+        DrawCircle();
     }
 
     public void SetAlpha(float alpha)
@@ -50,5 +31,28 @@ public class CircleRenderer : MonoBehaviour
 
         _lineRenderer.startColor = color;
         _lineRenderer.endColor = color;
+    }
+
+    private void DrawCircle()
+    {
+        _lineRenderer.positionCount = _segmentCount;
+        _lineRenderer.widthMultiplier = _width;
+        _lineRenderer.loop = true;
+
+        for (int i = 0; i < _segmentCount; i++)
+        {
+            float progress = (float)i / _segmentCount;
+
+            const float Tau = Mathf.PI * 2f;
+            float radian = (float)i / _segmentCount * Tau;
+
+            Vector3 position = new()
+            {
+                x = Mathf.Cos(radian) * _radius,
+                y = Mathf.Sin(radian) * _radius
+            };
+
+            _lineRenderer.SetPosition(i, position);
+        }
     }
 }

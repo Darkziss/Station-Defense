@@ -14,32 +14,39 @@ public class CircleRenderer : MonoBehaviour
     private const float minWidth = 1f;
 
     private const int minSegmentCount = 1;
-    private const int maxSegmentCount = 64;
+    private const int maxSegmentCount = 128;
+
+    private const bool Loop = true;
 
     private void OnValidate()
     {
         if (_lineRenderer == null)
             _lineRenderer = GetComponent<LineRenderer>();
+
+        DrawCircle();
     }
 
-    private void Start()
+    private void DrawCircle()
     {
+        _lineRenderer.loop = Loop;
+
         _lineRenderer.positionCount = _segmentCount;
         _lineRenderer.widthMultiplier = _width;
 
-        float angle = 20f;
-
         for (int i = 0; i < _segmentCount; i++)
         {
+            const float Tau = Mathf.PI * 2f;
+
+            float progress = (float)i / _segmentCount;
+            float radian = progress * Tau;
+
             Vector3 position = new()
             {
-                x = Mathf.Sin(angle * Mathf.Deg2Rad) * _radius,
-                y = Mathf.Cos(angle * Mathf.Deg2Rad) * _radius
+                x = Mathf.Sin(radian) * _radius,
+                y = Mathf.Cos(radian) * _radius
             };
 
             _lineRenderer.SetPosition(i, position);
-
-            angle += 380f / _segmentCount;
         }
     }
 

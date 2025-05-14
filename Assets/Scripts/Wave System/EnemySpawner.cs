@@ -15,6 +15,7 @@ namespace StationDefense
         [SerializeField] private bool _shouldSpawn = false;
 
         private Coroutine _spawnCoroutine;
+        private Coroutine _spawnGroupCoroutine;
 
         private readonly WaitForSeconds _singleSpawnDelay = new(1.5f);
         private readonly WaitForSeconds _groupSpawnDelay = new(4f);
@@ -47,6 +48,10 @@ namespace StationDefense
             _shouldSpawn = false;
 
             StopCoroutine(_spawnCoroutine);
+            StopCoroutine(_spawnGroupCoroutine);
+
+            _spawnCoroutine = null;
+            _spawnGroupCoroutine = null;
         }
 
         private IEnumerator SpawnEnemiesRandomly()
@@ -86,39 +91,34 @@ namespace StationDefense
 
         private void SpawnRandomGroup()
         {
-            IEnumerator SpawnGroup(EnemyGroup group)
-            {
-                for (int i = 0; i < group.BaseEnemyCount; i++)
-                {
-                    SpawnEnemyByPrefab(_enemyPrefab);
-
-                    yield return _enemySpawnDelay;
-                }
-
-                for (int i = 0; i < group.FastEnemyCount; i++)
-                {
-                    SpawnEnemyByPrefab(_fastEnemyPrefab);
-
-                    yield return _enemySpawnDelay;
-                }
-
-                for (int i = 0; i < group.BigEnemyCount; i++)
-                {
-                    SpawnEnemyByPrefab(_bigEnemyPrefab);
-
-                    yield return _enemySpawnDelay;
-                }
-            }
-            
             const int min = 0;
             int index = Random.Range(min, _groups.Length);
 
-            EnemyGroup group = _groups[index];
+            _spawnGroupCoroutine = StartCoroutine(SpawnGroup(_groups[index]));
+        }
 
-            Debug.Log($"Group: {group.name}");
-            Debug.Log($"Base: {group.BaseEnemyCount}; Fast: {group.FastEnemyCount}; Big: {group.BigEnemyCount}");
-            
-            StartCoroutine(SpawnGroup(group));
+        private IEnumerator SpawnGroup(EnemyGroup group)
+        {
+            for (int i = 0; i < group.BaseEnemyCount; i++)
+            {
+                SpawnEnemyByPrefab(_enemyPrefab);
+
+                yield return _enemySpawnDelay;
+            }
+
+            for (int i = 0; i < group.FastEnemyCount; i++)
+            {
+                SpawnEnemyByPrefab(_fastEnemyPrefab);
+
+                yield return _enemySpawnDelay;
+            }
+
+            for (int i = 0; i < group.BigEnemyCount; i++)
+            {
+                SpawnEnemyByPrefab(_bigEnemyPrefab);
+
+                yield return _enemySpawnDelay;
+            }
         }
 
         private Enemy GetRandomEnemy()

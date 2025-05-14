@@ -14,17 +14,14 @@ namespace StationDefense
         private CircleRenderer _circleRenderer;
         private CircleCollider2D _collider;
 
-        private readonly Vector3 _startScale = Vector3.one * StartScaleFactor;
-        private readonly Vector3 _desiredScale = Vector3.one * DesiredScaleFactor;
+        private readonly Vector3 _startScale = Vector3.one * 0.1f;
+        private readonly Vector3 _desiredScale = Vector3.one * 5f;
 
         private readonly TweenSettings<float> _fadeTweenSettings = new(1f, 0f, fadeDuration, fadeEase);
 
         public bool IsExpanding { get; private set; } = false;
 
         public int Damage => _damage;
-
-        private const float StartScaleFactor = 0.1f;
-        private const float DesiredScaleFactor = 6f;
 
         private const float scaleDuration = 1.5f;
         private const Ease scaleEase = Ease.OutQuart;

@@ -281,7 +281,6 @@ GameObject:
   - component: {fileID: 29653581}
   - component: {fileID: 29653577}
   - component: {fileID: 29653576}
-  - component: {fileID: 29653582}
   m_Layer: 11
   m_Name: CircularWave
   m_TagString: Untagged
@@ -336,7 +335,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.46
 --- !u!4 &29653579
 Transform:
   m_ObjectHideFlags: 0
@@ -394,42 +393,10 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Positions:
-  - {x: 2, y: 0, z: 0}
-  - {x: 1.9615705, y: 0.39018065, z: 0}
-  - {x: 1.847759, y: 0.7653669, z: 0}
-  - {x: 1.6629392, y: 1.1111405, z: 0}
-  - {x: 1.4142135, y: 1.4142135, z: 0}
-  - {x: 1.1111404, y: 1.6629393, z: 0}
-  - {x: 0.76536685, y: 1.847759, z: 0}
-  - {x: 0.39018047, y: 1.9615706, z: 0}
-  - {x: -0.00000008742278, y: 2, z: 0}
-  - {x: -0.39018065, y: 1.9615705, z: 0}
-  - {x: -0.76536703, y: 1.847759, z: 0}
-  - {x: -1.1111407, y: 1.6629391, z: 0}
-  - {x: -1.4142135, y: 1.4142135, z: 0}
-  - {x: -1.6629393, y: 1.1111404, z: 0}
-  - {x: -1.8477592, y: 0.76536655, z: 0}
-  - {x: -1.9615706, y: 0.39018062, z: 0}
-  - {x: -2, y: -0.00000017484555, z: 0}
-  - {x: -1.9615705, y: -0.39018098, z: 0}
-  - {x: -1.847759, y: -0.76536685, z: 0}
-  - {x: -1.6629391, y: -1.1111406, z: 0}
-  - {x: -1.4142133, y: -1.4142138, z: 0}
-  - {x: -1.11114, y: -1.6629395, z: 0}
-  - {x: -0.76536626, y: -1.8477594, z: 0}
-  - {x: -0.39018077, y: -1.9615705, z: 0}
-  - {x: 0.000000023849761, y: -2, z: 0}
-  - {x: 0.39018083, y: -1.9615705, z: 0}
-  - {x: 0.7653672, y: -1.8477589, z: 0}
-  - {x: 1.1111408, y: -1.662939, z: 0}
-  - {x: 1.414214, y: -1.4142131, z: 0}
-  - {x: 1.6629392, y: -1.1111406, z: 0}
-  - {x: 1.8477591, y: -0.76536685, z: 0}
-  - {x: 1.9615706, y: -0.39018047, z: 0}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 10
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -484,7 +451,7 @@ LineRenderer:
     generateLightingData: 0
   m_MaskInteraction: 0
   m_UseWorldSpace: 0
-  m_Loop: 1
+  m_Loop: 0
   m_ApplyActiveColorSpace: 1
 --- !u!114 &29653581
 MonoBehaviour:
@@ -498,36 +465,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74e0efae3dea9e4aa127a80f3cba15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 2
-  _width: 10
+  _radius: 2.46
+  _width: 5
   _segmentCount: 32
---- !u!50 &29653582
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 29653575}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &44561926
 GameObject:
   m_ObjectHideFlags: 0

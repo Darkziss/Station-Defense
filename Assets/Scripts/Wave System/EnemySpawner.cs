@@ -16,7 +16,12 @@ namespace StationDefense
 
         private Coroutine _spawnCoroutine;
 
-        private readonly WaitForSeconds _spawnDelay = new(1.5f);
+        private readonly WaitForSeconds _singleSpawnDelay = new(1.5f);
+        private readonly WaitForSeconds _groupSpawnDelay = new(4f);
+
+        private readonly WaitForSeconds _enemySpawnDelay = new(1.3f);
+
+        private const float firstSpawnDelay = 1f;
 
         private const float minX = -maxX;
         private const float maxX = 10f;
@@ -46,16 +51,18 @@ namespace StationDefense
 
         private IEnumerator SpawnEnemiesRandomly()
         {
+            yield return new WaitForSeconds(firstSpawnDelay);
+            
             while (true)
             {
-                yield return _spawnDelay;
-
                 bool isGroup = RandomUtility.GetRandomBool();
 
                 if (isGroup)
                     SpawnRandomGroup();
                 else
                     SpawnRandomEnemy();
+
+                yield return isGroup ? _groupSpawnDelay : _singleSpawnDelay;
             }
         }
 
@@ -79,26 +86,39 @@ namespace StationDefense
 
         private void SpawnRandomGroup()
         {
-            void SpawnMultipleEnemy(Enemy prefab, int spawnCount)
+            IEnumerator SpawnGroup(EnemyGroup group)
             {
-                for (int i = 0; i < spawnCount; i++)
-                    SpawnEnemyByPrefab(prefab);
+                for (int i = 0; i < group.BaseEnemyCount; i++)
+                {
+                    SpawnEnemyByPrefab(_enemyPrefab);
+
+                    yield return _enemySpawnDelay;
+                }
+
+                for (int i = 0; i < group.FastEnemyCount; i++)
+                {
+                    SpawnEnemyByPrefab(_fastEnemyPrefab);
+
+                    yield return _enemySpawnDelay;
+                }
+
+                for (int i = 0; i < group.BigEnemyCount; i++)
+                {
+                    SpawnEnemyByPrefab(_bigEnemyPrefab);
+
+                    yield return _enemySpawnDelay;
+                }
             }
             
             const int min = 0;
-
             int index = Random.Range(min, _groups.Length);
 
             EnemyGroup group = _groups[index];
 
-            if (group.BaseEnemyCount > 0)
-                SpawnMultipleEnemy(_enemyPrefab, group.BaseEnemyCount);
-
-            if (group.FastEnemyCount > 0)
-                SpawnMultipleEnemy(_fastEnemyPrefab, group.FastEnemyCount);
-
-            if (group.BigEnemyCount > 0)
-                SpawnMultipleEnemy(_bigEnemyPrefab, group.BigEnemyCount);
+            Debug.Log($"Group: {group.name}");
+            Debug.Log($"Base: {group.BaseEnemyCount}; Fast: {group.FastEnemyCount}; Big: {group.BigEnemyCount}");
+            
+            StartCoroutine(SpawnGroup(group));
         }
 
         private Enemy GetRandomEnemy()

@@ -3603,7 +3603,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 6216944160205406261, guid: fd02fae39eec2704e9ffc8fab06888f2, type: 3}
   _fastEnemyPrefab: {fileID: -493935862947105815, guid: 9705059ad898d6e43918daec0f10aba7, type: 3}
-  _strongEnemyPrefab: {fileID: 6431231410805223651, guid: 897032f100b084d4ab85406ccc1139fb, type: 3}
+  _bigEnemyPrefab: {fileID: 6431231410805223651, guid: 897032f100b084d4ab85406ccc1139fb, type: 3}
+  _groups:
+  - {fileID: 11400000, guid: 796216de97520d5409005d168380df06, type: 2}
+  - {fileID: 11400000, guid: f33d52ba867a0c1408e9138ef2d6c676, type: 2}
+  - {fileID: 11400000, guid: fcd0aae2660de7b4f9c21d9b4ced6c65, type: 2}
+  - {fileID: 11400000, guid: e1eaa7bcb4eadbb4a86c36721c601ad5, type: 2}
+  - {fileID: 11400000, guid: fdb02fbfe4d71ae478dc1768199802c6, type: 2}
+  - {fileID: 11400000, guid: e2aec3b8a9cf476488a18304e30e4fc3, type: 2}
   _shouldSpawn: 0
 --- !u!1 &1838563397
 GameObject:

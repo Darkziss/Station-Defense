@@ -14,9 +14,8 @@ namespace StationDefense
         private CircleRenderer _circleRenderer;
         private CircleCollider2D _collider;
 
-        private readonly Vector3 _startScale = Vector3.one * StartScaleFactor;
-        private readonly Vector3 _desiredScale = Vector3.one * DesiredScaleFactor;
-
+        private readonly TweenSettings<Vector3> _scaleTweenSettings = new(Vector3.one * StartScaleFactor, 
+            Vector3.one * DesiredScaleFactor, scaleDuration, scaleEase);
         private readonly TweenSettings<float> _fadeTweenSettings = new(1f, 0f, fadeDuration, fadeEase);
 
         public bool IsExpanding { get; private set; } = false;
@@ -57,7 +56,7 @@ namespace StationDefense
             gameObject.SetActive(true);
 
             Sequence.Create()
-                .Chain(Tween.Scale(_transform, _startScale, _desiredScale, scaleDuration, scaleEase))
+                .Chain(Tween.Scale(_transform, _scaleTweenSettings))
                 .ChainCallback(() => _collider.enabled = false)
                 .Chain(Tween.Custom(_fadeTweenSettings, _circleRenderer.SetAlpha))
                 .ChainCallback(Disable);

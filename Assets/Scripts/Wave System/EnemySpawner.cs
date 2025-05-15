@@ -12,7 +12,7 @@ namespace StationDefense
 
         [SerializeField] private EnemyGroup[] _groups;
 
-        [SerializeField] private bool _shouldSpawn = false;
+        private bool _shouldSpawn = false;
 
         private Coroutine _spawnCoroutine;
         private Coroutine _spawnGroupCoroutine;

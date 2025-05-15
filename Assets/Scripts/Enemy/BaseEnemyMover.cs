@@ -8,6 +8,8 @@ namespace StationDefense
     {
         [SerializeField] private Transform _transform;
 
+        [SerializeField] private EnemyAnimator _enemyAnimator;
+
         [SerializeField] private EnemyBullet _bulletPrefab;
 
         [SerializeField] private bool _isMoving = false;
@@ -36,6 +38,9 @@ namespace StationDefense
         {
             if (_transform == null)
                 _transform = transform;
+
+            if (_enemyAnimator == null)
+                _enemyAnimator = GetComponent<EnemyAnimator>();
         }
 
         public void Init(ColorTeam team, float shootDelay)
@@ -138,6 +143,8 @@ namespace StationDefense
                     _transform.position, rotation);
 
                 bullet.Init(_team, shootDirection);
+
+                _enemyAnimator.PlayActionAnimation();
             }
         }
     }

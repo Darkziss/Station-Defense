@@ -8,6 +8,9 @@ namespace StationDefense
         [SerializeField] private int _currentHealth = 0;
         [SerializeField] private int _maxHealth = 10;
 
+        public int CurrentHealth => _currentHealth;
+
+        public bool IsHealthFull => _currentHealth == _maxHealth;
         public bool IsHealthAtZero => _currentHealth == minHealth;
 
         private const int minHealth = 0;

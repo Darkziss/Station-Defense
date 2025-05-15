@@ -22,13 +22,15 @@ namespace StationDefense
 
         private readonly WaitForSeconds _enemySpawnDelay = new(1.3f);
 
+        private bool IsSpawningGroup => _spawnGroupCoroutine != null;
+
         private const float firstSpawnDelay = 1f;
 
         private const float minX = -maxX;
-        private const float maxX = 10f;
+        private const float maxX = 12f;
 
         private const float minY = -maxY;
-        private const float maxY = 6f;
+        private const float maxY = 8f;
 
         public void StartSpawn()
         {
@@ -48,7 +50,8 @@ namespace StationDefense
             _shouldSpawn = false;
 
             StopCoroutine(_spawnCoroutine);
-            StopCoroutine(_spawnGroupCoroutine);
+            if (IsSpawningGroup)
+                StopCoroutine(_spawnGroupCoroutine);
 
             _spawnCoroutine = null;
             _spawnGroupCoroutine = null;

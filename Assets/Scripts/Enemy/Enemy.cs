@@ -98,6 +98,16 @@ public abstract class Enemy : MonoBehaviour
         _boxCollider.enabled = false;
     }
 
+    private void SetupOnEnable()
+    {
+        _boxCollider.enabled = true;
+
+        if (!_health.IsHealthFull)
+            _health.RestoreHealth();
+
+        _enemyAnimator.ResetAll();
+    }
+
     private void InstantDisable()
     {
         StopAction();

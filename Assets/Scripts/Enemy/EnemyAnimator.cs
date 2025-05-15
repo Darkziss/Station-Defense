@@ -17,14 +17,16 @@ namespace StationDefense
 
         private readonly WaitForSeconds _actionAnimationDuration = new(ActionDuration);
 
-        private readonly TweenSettings<float> _fadeOutSettings = new(0f, FadeOutDuration);
+        private readonly TweenSettings<float> _fadeOutSettings = new(0f, FadeOutDuration, ease: FadeEase);
 
         private bool IsNotOpaque => _spriteRenderer.color.a < 1f;
 
         private bool IsPlayingActionAnimation => _actionAnimationCoroutine != null;
 
         private const float ActionDuration = 0.15f;
+        
         private const float FadeOutDuration = 0.5f;
+        private const Ease FadeEase = Ease.Linear;
 
         private void OnValidate()
         {

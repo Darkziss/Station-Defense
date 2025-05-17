@@ -17,11 +17,11 @@ namespace StationDefense
         private readonly Color32 _actionColor = Color.white;
 
         private Coroutine _actionAnimationCoroutine;
-
         private readonly WaitForSeconds _actionAnimationDuration = new(ActionDuration);
 
         private readonly TweenSettings<Vector3> _disableAnimationSettings = new(Vector3.zero,
             ScaleDuration, ease: ScaleEase);
+
         private readonly ShakeSettings _damageAnimationSettings = new(Vector3.one * ScaleShakeFactor,
             duration: ScaleShakeDuration, frequency: ScaleShakeFrequency);
 

@@ -34,6 +34,9 @@ namespace StationDefense
 
         private readonly WaitForSeconds _changeDirectionDelay = new(0.5f);
 
+        private const float MaxXDistance = 11.5f;
+        private const float MaxYDistance = 7f;
+
         private void OnValidate()
         {
             if (_transform == null)
@@ -54,12 +57,23 @@ namespace StationDefense
         {
             if (!_isMoving)
                 return;
-            
+
             if (_isAttacking)
             {
-                Vector2 translate = _attackMoveSpeed * Time.deltaTime * _moveDirection;
+                float xDistance = Mathf.Abs(_targetPosition.x - _transform.position.x);
+                float yDistance = Mathf.Abs(_targetPosition.y - _transform.position.y);
 
-                _transform.Translate(translate);
+                if (xDistance > MaxXDistance || yDistance > MaxYDistance)
+                {
+                    _transform.position = Vector2.MoveTowards(_transform.position, _targetPosition,
+                        _moveSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    Vector2 translate = _attackMoveSpeed * Time.deltaTime * _moveDirection;
+
+                    _transform.Translate(translate);
+                }
             }
             else
             {

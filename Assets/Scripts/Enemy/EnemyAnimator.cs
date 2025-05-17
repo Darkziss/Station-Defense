@@ -28,6 +28,7 @@ namespace StationDefense
 
         private Color32 ActionColor => Color.Lerp(_originalColor, Color.white, ActionColorFactor);
 
+        private bool IsPlayingSpawnAnimation { get; set; } = false;
         private bool IsPlayingActionAnimation => _actionAnimationCoroutine != null;
 
         private const float FadeInDuration = 0.1f;
@@ -61,12 +62,15 @@ namespace StationDefense
 
         public void PlaySpawnAnimation()
         {
-            Tween.Alpha(_spriteRenderer, _fadeInSettings);
+            IsPlayingSpawnAnimation = true;
+            
+            Tween.Alpha(_spriteRenderer, _fadeInSettings)
+                .OnComplete(() => IsPlayingSpawnAnimation = false);
         }
 
         public void PlayActionAnimation()
         {
-            if (IsPlayingActionAnimation)
+            if (IsPlayingSpawnAnimation || IsPlayingActionAnimation)
                 return;
 
             _actionAnimationCoroutine = StartCoroutine(ActionAnimation());

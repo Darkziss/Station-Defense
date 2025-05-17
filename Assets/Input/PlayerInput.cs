@@ -121,7 +121,7 @@ namespace StationDefense
                 {
                     ""name"": ""up"",
                     ""id"": ""95dd54d8-e6ef-45f6-8395-ff43280ae504"",
-                    ""path"": ""<Keyboard>/#(W)"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Desktop"",
@@ -132,7 +132,7 @@ namespace StationDefense
                 {
                     ""name"": ""down"",
                     ""id"": ""aa26b12c-b189-4a96-83e1-cb024e1bfe19"",
-                    ""path"": ""<Keyboard>/#(S)"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Desktop"",
@@ -143,7 +143,7 @@ namespace StationDefense
                 {
                     ""name"": ""left"",
                     ""id"": ""8a635378-6bc6-4894-ba72-76efd9ef5b14"",
-                    ""path"": ""<Keyboard>/#(A)"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Desktop"",
@@ -154,7 +154,7 @@ namespace StationDefense
                 {
                     ""name"": ""right"",
                     ""id"": ""3679d9df-c90e-4643-a25b-c40c9f4a803d"",
-                    ""path"": ""<Keyboard>/#(D)"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Desktop"",

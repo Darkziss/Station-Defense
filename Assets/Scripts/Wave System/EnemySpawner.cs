@@ -4,7 +4,7 @@ using Pooling;
 
 namespace StationDefense
 {
-    public partial class EnemySpawner : MonoBehaviour
+    public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private BaseEnemy _enemyPrefab;
         [SerializeField] private FastEnemy _fastEnemyPrefab;

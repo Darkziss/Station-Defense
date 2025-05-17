@@ -48,6 +48,8 @@ public abstract class Enemy : MonoBehaviour
         _health.RestoreHealth();
 
         _boxCollider.enabled = true;
+
+        _enemyAnimator.PlaySpawnAnimation();
     }
 
     public virtual void Init(ColorTeam team)

@@ -8,8 +8,8 @@ namespace StationDefense
     [RequireComponent(typeof(SpriteRenderer))]
     public class EnemyAnimator : MonoBehaviour
     {
-        private Transform _transform;
-        private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Transform _transform;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
 
         private Vector2 _originalScale;
         private Color32 _originalColor;
@@ -17,15 +17,23 @@ namespace StationDefense
         private Coroutine _actionAnimationCoroutine;
         private readonly WaitForSeconds _actionAnimationDuration = new(ActionDuration);
 
+        private readonly TweenSettings<float> _fadeInSettings = new(1f, 0f, FadeInDuration,
+            ease: FadeInEase, cycles: FadeInCycles, FadeInCycleMode);
+
         private readonly TweenSettings<Vector3> _disableAnimationSettings = new(Vector3.zero,
             ScaleDuration, ease: ScaleEase);
 
         private readonly ShakeSettings _damageAnimationSettings = new(Vector3.one * ScaleShakeFactor,
             duration: ScaleShakeDuration, frequency: ScaleShakeFrequency);
 
+        private Color32 ActionColor => Color.Lerp(_originalColor, Color.white, ActionColorFactor);
+
         private bool IsPlayingActionAnimation => _actionAnimationCoroutine != null;
 
-        private Color32 ActionColor => Color.Lerp(_originalColor, Color.white, ActionColorFactor);
+        private const float FadeInDuration = 0.1f;
+        private const Ease FadeInEase = Ease.Linear;
+        private const int FadeInCycles = 4;
+        private const CycleMode FadeInCycleMode = CycleMode.Yoyo;
 
         private const float ActionDuration = 0.15f;
         private const float ActionColorFactor = 0.8f;
@@ -49,6 +57,11 @@ namespace StationDefense
         private void Start()
         {
             _originalScale = _transform.localScale;
+        }
+
+        public void PlaySpawnAnimation()
+        {
+            Tween.Alpha(_spriteRenderer, _fadeInSettings);
         }
 
         public void PlayActionAnimation()

@@ -34,9 +34,9 @@ namespace StationDefense
         private const float ScaleDuration = 0.3f;
         private const Ease ScaleEase = Ease.Linear;
 
-        private const float ScaleShakeFactor = 1.05f;
+        private const float ScaleShakeFactor = 0.5f;
         private const float ScaleShakeDuration = 0.3f;
-        private const int ScaleShakeFrequency = 10;
+        private const int ScaleShakeFrequency = 5;
 
         private void OnValidate()
         {
@@ -62,9 +62,6 @@ namespace StationDefense
 
         public void PlayDamageAnimation()
         {
-            if (IsPlayingDamageAnimaton)
-                return;
-
             IsPlayingDamageAnimaton = true;
 
             Tween.ShakeScale(_transform, _damageAnimationSettings)

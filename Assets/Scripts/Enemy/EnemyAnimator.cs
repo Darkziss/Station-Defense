@@ -14,7 +14,6 @@ namespace StationDefense
         private Vector2 _originalScale;
 
         private Color32 _originalColor;
-        private readonly Color32 _actionColor = Color.white;
 
         private Coroutine _actionAnimationCoroutine;
         private readonly WaitForSeconds _actionAnimationDuration = new(ActionDuration);
@@ -27,7 +26,10 @@ namespace StationDefense
 
         private bool IsPlayingActionAnimation => _actionAnimationCoroutine != null;
 
+        private Color32 ActionColor => Color.Lerp(_originalColor, Color.white, ActionColorFactor);
+
         private const float ActionDuration = 0.15f;
+        private const float ActionColorFactor = 0.8f;
         
         private const float ScaleDuration = 0.3f;
         private const Ease ScaleEase = Ease.Linear;
@@ -77,7 +79,7 @@ namespace StationDefense
         private IEnumerator ActionAnimation()
         {
             _originalColor = _spriteRenderer.color;
-            _spriteRenderer.color = _actionColor;
+            _spriteRenderer.color = ActionColor;
 
             yield return _actionAnimationDuration;
 

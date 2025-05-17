@@ -21,7 +21,7 @@ namespace StationDefense
         private readonly WaitForSeconds _actionAnimationDuration = new(ActionDuration);
 
         private readonly TweenSettings<Vector3> _disableAnimationSettings = new(Vector3.zero,
-            FadeOutDuration, ease: FadeEase);
+            ScaleDuration, ease: ScaleEase);
         private readonly ShakeSettings _damageAnimationSettings = new(Vector3.one * ScaleShakeFactor,
             duration: ScaleShakeDuration, frequency: ScaleShakeFrequency);
 
@@ -31,8 +31,8 @@ namespace StationDefense
 
         private const float ActionDuration = 0.15f;
         
-        private const float FadeOutDuration = 0.3f;
-        private const Ease FadeEase = Ease.Linear;
+        private const float ScaleDuration = 0.3f;
+        private const Ease ScaleEase = Ease.Linear;
 
         private const float ScaleShakeFactor = 1.05f;
         private const float ScaleShakeDuration = 0.3f;

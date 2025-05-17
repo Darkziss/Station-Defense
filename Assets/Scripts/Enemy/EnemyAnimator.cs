@@ -11,9 +11,9 @@ namespace StationDefense
         [SerializeField] private Transform _transform;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        private Vector2 _defaultScale;
+        private Vector2 _originalScale;
 
-        private Color32 _defaultColor;
+        private Color32 _originalColor;
         private readonly Color32 _actionColor = Color.white;
 
         private Coroutine _actionAnimationCoroutine;
@@ -26,8 +26,6 @@ namespace StationDefense
             duration: ScaleShakeDuration, frequency: ScaleShakeFrequency);
 
         private bool IsPlayingActionAnimation => _actionAnimationCoroutine != null;
-
-        private bool IsPlayingDamageAnimaton { get; set; } = false;
 
         private const float ActionDuration = 0.15f;
         
@@ -49,7 +47,7 @@ namespace StationDefense
 
         private void Start()
         {
-            _defaultScale = _transform.localScale;
+            _originalScale = _transform.localScale;
         }
 
         public void PlayActionAnimation()
@@ -62,10 +60,7 @@ namespace StationDefense
 
         public void PlayDamageAnimation()
         {
-            IsPlayingDamageAnimaton = true;
-
-            Tween.ShakeScale(_transform, _damageAnimationSettings)
-                .OnComplete(() => IsPlayingDamageAnimaton = false);
+            Tween.ShakeScale(_transform, _damageAnimationSettings);
         }
 
         public void PlayDisableAnimation(Action callback)
@@ -73,7 +68,7 @@ namespace StationDefense
             Tween tween = Tween.Scale(_transform, _disableAnimationSettings)
                 .OnComplete(() =>
                 {
-                    _transform.localScale = _defaultScale;
+                    _transform.localScale = _originalScale;
 
                     callback?.Invoke();
                 });
@@ -81,12 +76,12 @@ namespace StationDefense
 
         private IEnumerator ActionAnimation()
         {
-            _defaultColor = _spriteRenderer.color;
+            _originalColor = _spriteRenderer.color;
             _spriteRenderer.color = _actionColor;
 
             yield return _actionAnimationDuration;
 
-            _spriteRenderer.color = _defaultColor;
+            _spriteRenderer.color = _originalColor;
 
             _actionAnimationCoroutine = null;
         }

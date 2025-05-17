@@ -48,8 +48,6 @@ public abstract class Enemy : MonoBehaviour
         _health.RestoreHealth();
 
         _boxCollider.enabled = true;
-
-        _enemyAnimator.ResetAll();
     }
 
     public virtual void Init(ColorTeam team)
@@ -75,6 +73,8 @@ public abstract class Enemy : MonoBehaviour
 
             if (_health.IsHealthAtZero)
                 DisableWithAnimation();
+            else
+                _enemyAnimator.PlayDamageAnimation();
 
             EnemyHit?.Invoke(isSameTeam);
         }
@@ -104,8 +104,6 @@ public abstract class Enemy : MonoBehaviour
 
         if (!_health.IsHealthFull)
             _health.RestoreHealth();
-
-        _enemyAnimator.ResetAll();
     }
 
     private void InstantDisable()

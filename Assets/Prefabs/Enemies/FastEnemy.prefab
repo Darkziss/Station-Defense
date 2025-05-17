@@ -223,4 +223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224411ee00c9977408dcb660c2df53cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transform: {fileID: 6833815995572449510}
   _spriteRenderer: {fileID: 7941851549012414149}
+  _defaultScale: {x: 0.3, y: 0.3}
+  _defaultColor:
+    serializedVersion: 2
+    rgba: 0

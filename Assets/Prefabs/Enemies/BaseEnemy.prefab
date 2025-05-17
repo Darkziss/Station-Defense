@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 8697786229375253760}
+  _enemyAnimator: {fileID: 5329358005631241448}
   _bulletPrefab: {fileID: 6686620049692101872, guid: 6c40b68a05302c449b3920434f43fce9, type: 3}
   _isMoving: 0
   _moveSpeed: 1
@@ -227,4 +228,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224411ee00c9977408dcb660c2df53cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transform: {fileID: 8697786229375253760}
   _spriteRenderer: {fileID: 6738668549455112003}
+  _defaultScale: {x: 0.5, y: 0.5}
+  _defaultColor:
+    serializedVersion: 2
+    rgba: 0

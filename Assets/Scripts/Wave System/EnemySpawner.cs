@@ -17,6 +17,8 @@ namespace StationDefense
         private Coroutine _spawnCoroutine;
         private Coroutine _spawnGroupCoroutine;
 
+        private Rect _windowRect = new(15f, 15f, spawnEnemyWindowWidth, spawnEnemyWindowHeight);
+
         private readonly WaitForSeconds _singleSpawnDelay = new(1.5f);
         private readonly WaitForSeconds _groupSpawnDelay = new(4f);
 
@@ -31,6 +33,9 @@ namespace StationDefense
 
         private const float minY = -maxY;
         private const float maxY = 8f;
+
+        private const float spawnEnemyWindowWidth = 420f;
+        private const float spawnEnemyWindowHeight = 200f;
 
         public void StartSpawn()
         {
@@ -157,5 +162,22 @@ namespace StationDefense
         }
 
         private static ColorTeam GetRandomTeam() => (ColorTeam)Random.Range(0, 4);
+
+        private void OnGUI()
+        {
+            const string windowContent = "Spawn enemies";
+
+            _windowRect = GUI.Window(0, _windowRect, SpawnWindowFunction, windowContent);
+        }
+
+        private void SpawnWindowFunction(int id)
+        {
+            const string buttonText = "Spawn Big Enemy";
+
+            Vector2 buttonSize = new(150f, 50f);
+            
+            if (GUI.Button(new(_windowRect.center, buttonSize), buttonText))
+                SpawnEnemyByPrefab(_bigEnemyPrefab);
+        }
     }
 }

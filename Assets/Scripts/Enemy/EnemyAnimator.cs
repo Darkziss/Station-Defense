@@ -8,11 +8,10 @@ namespace StationDefense
     [RequireComponent(typeof(SpriteRenderer))]
     public class EnemyAnimator : MonoBehaviour
     {
-        [SerializeField] private Transform _transform;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        private Transform _transform;
+        private SpriteRenderer _spriteRenderer;
 
         private Vector2 _originalScale;
-
         private Color32 _originalColor;
 
         private Coroutine _actionAnimationCoroutine;

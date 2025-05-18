@@ -7,6 +7,8 @@ namespace StationDefense
     public class Ball : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private TrailRenderer _trailRenderer;
+
         [SerializeField] private Mover _mover;
 
         [SerializeField] private string _ballName;
@@ -29,10 +31,15 @@ namespace StationDefense
 
         private const int damageMultiplier = 3;
 
+        private const byte TrailEndAlpha = 0;
+
         private void OnValidate()
         {
             if (_spriteRenderer == null)
                 _spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (_trailRenderer == null)
+                _trailRenderer = GetComponent<TrailRenderer>();
 
             if (_mover == null)
                 _mover = GetComponent<Mover>();
@@ -51,12 +58,31 @@ namespace StationDefense
         {
             Team = team;
 
-            _spriteRenderer.color = TeamColorStorage.GetByTeam(team);
+            Color32 teamColor = TeamColorStorage.GetByTeam(team);
+
+            _spriteRenderer.color = teamColor;
+
+            SetTrailColor(teamColor);
+            _trailRenderer.emitting = true;
 
             _mover.SetMoveDirection(moveDirection);
             _mover.StartMoving();
         }
 
-        private void Disable() => PoolStorage.PutToPool(_ballName, this);
+        private void Disable()
+        {
+            PoolStorage.PutToPool(_ballName, this);
+
+            _trailRenderer.emitting = false;
+            _trailRenderer.Clear();
+        }
+
+        private void SetTrailColor(Color32 color)
+        {
+            Color32 endColor = new(color.r, color.g, color.b, TrailEndAlpha);
+
+            _trailRenderer.startColor = color;
+            _trailRenderer.endColor = endColor;
+        }
     }
 }

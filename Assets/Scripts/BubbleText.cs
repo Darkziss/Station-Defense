@@ -5,6 +5,7 @@ using PrimeTween;
 
 namespace StationDefense
 {
+    [RequireComponent(typeof(RectTransform), typeof(TMP_Text))]
     public class BubbleText : MonoBehaviour
     {
         [SerializeField] private RectTransform _rectTransform;

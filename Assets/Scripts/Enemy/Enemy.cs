@@ -13,6 +13,8 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField] private EnemyAnimator _enemyAnimator;
 
+    [SerializeField] private BubbleText _bubbleTextPrefab;
+
     [SerializeField] private int _ballLayer;
     [SerializeField] private int _baseLayer;
     [SerializeField] private int _circularWaveLayer;
@@ -77,6 +79,11 @@ public abstract class Enemy : MonoBehaviour
                 DisableWithAnimation();
             else
                 _enemyAnimator.PlayDamageAnimation();
+
+            BubbleText text = PoolStorage.GetFromPool(nameof(BubbleText), _bubbleTextPrefab, 
+                transform.position, Quaternion.identity);
+
+            text.SetText(desiredDamage.ToString(), Team);
 
             EnemyHit?.Invoke(isSameTeam);
         }

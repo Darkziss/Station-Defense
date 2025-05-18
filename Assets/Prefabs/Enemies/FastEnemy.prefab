@@ -207,6 +207,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 5093141828287509748}
   _health: {fileID: 3642167077764565664}
   _enemyAnimator: {fileID: 4418480584003810631}
+  _bubbleTextPrefab: {fileID: 8953929903599068873, guid: 754dfd0cfee4e2b4bbe2b893022d9360, type: 3}
   _ballLayer: 6
   _baseLayer: 9
   _circularWaveLayer: 11
@@ -225,7 +226,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 6833815995572449510}
   _spriteRenderer: {fileID: 7941851549012414149}
-  _defaultScale: {x: 0.3, y: 0.3}
-  _defaultColor:
-    serializedVersion: 2
-    rgba: 0

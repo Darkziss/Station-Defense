@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6686668115405569345}
   - component: {fileID: 8953929903599068873}
   m_Layer: 5
-  m_Name: DamageText
+  m_Name: BubbleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

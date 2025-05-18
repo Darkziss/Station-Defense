@@ -22,7 +22,7 @@ namespace StationDefense
 
         public void Init()
         {
-            Enemy.EnemyHit += ChangeScore;
+            //Enemy.EnemyHit += ChangeScore;
 
             _currentQuota = defaultQuota;
 

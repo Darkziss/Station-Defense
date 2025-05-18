@@ -1820,6 +1820,7 @@ MonoBehaviour:
   _mainPresenter: {fileID: 1083956582}
   _deathHandler: {fileID: 603975970}
   _scoreTracker: {fileID: 1750423787}
+  _bubbleTextSpawner: {fileID: 1728123065}
   _cannonSelector: {fileID: 993123483}
   _base: {fileID: 337711924}
   _cannons:
@@ -3245,6 +3246,7 @@ Transform:
   - {fileID: 1359198080}
   - {fileID: 1750423786}
   - {fileID: 1772910994}
+  - {fileID: 1728123064}
   - {fileID: 1132596382}
   - {fileID: 315578051}
   m_Father: {fileID: 0}
@@ -3587,6 +3589,55 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1728123063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1728123064}
+  - component: {fileID: 1728123065}
+  m_Layer: 0
+  m_Name: BubbleTextSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1728123064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728123063}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1336661313}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1728123065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728123063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58322a82a4b45374b8b8ba24405f8942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bubbleTextPrefab: {fileID: 8953929903599068873, guid: 754dfd0cfee4e2b4bbe2b893022d9360, type: 3}
+  _outlineRedMaterial: {fileID: 2100000, guid: 383b9e277cec48545ac23d3d503eeab2, type: 2}
+  _outlineYellowMaterial: {fileID: 2100000, guid: 11ce9852c95e9cd4c8969df096a5b97e, type: 2}
+  _outlineGreenMaterial: {fileID: 2100000, guid: ce1d633306dfade44ae846500ec044c0, type: 2}
+  _outlineBlueMaterial: {fileID: 2100000, guid: 98e6bf81656d468459e5709ccf5a120b, type: 2}
 --- !u!1 &1750423785
 GameObject:
   m_ObjectHideFlags: 0

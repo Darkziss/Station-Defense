@@ -6,14 +6,13 @@ using Pooling;
 [RequireComponent(typeof(BoxCollider2D), typeof(Health), typeof(EnemyAnimator))]
 public abstract class Enemy : MonoBehaviour
 {
+    [SerializeField] private Transform _transform;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private BoxCollider2D _boxCollider;
 
     [SerializeField] private Health _health;
 
     [SerializeField] private EnemyAnimator _enemyAnimator;
-
-    [SerializeField] private BubbleText _bubbleTextPrefab;
 
     [SerializeField] private int _ballLayer;
     [SerializeField] private int _baseLayer;
@@ -23,10 +22,13 @@ public abstract class Enemy : MonoBehaviour
 
     public ColorTeam Team { get; private set; }
 
-    public static event Action<bool> EnemyHit;
+    public static event Action<Vector2, int, ColorTeam> EnemyHit;
 
     protected virtual void OnValidate()
     {
+        if (_transform == null)
+            _transform = transform;
+        
         if (_spriteRenderer == null)
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -80,12 +82,7 @@ public abstract class Enemy : MonoBehaviour
             else
                 _enemyAnimator.PlayDamageAnimation();
 
-            BubbleText text = PoolStorage.GetFromPool(nameof(BubbleText), _bubbleTextPrefab, 
-                transform.position, Quaternion.identity);
-
-            text.SetText(desiredDamage.ToString(), Team);
-
-            EnemyHit?.Invoke(isSameTeam);
+            EnemyHit?.Invoke(_transform.position, desiredDamage, Team);
         }
         else if (layer == _circularWaveLayer)
         {

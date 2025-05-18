@@ -1,6 +1,7 @@
 using UnityEngine;
 using Pooling;
 using TMPro;
+using System.Collections;
 
 namespace StationDefense
 {
@@ -8,14 +9,9 @@ namespace StationDefense
     {
         [SerializeField] private TMP_Text _text;
 
-        [SerializeField] private Material _outlineRedMaterial;
-        [SerializeField] private Material _outlineYellowMaterial;
-        [SerializeField] private Material _outlineGreenMaterial;
-        [SerializeField] private Material _outlineBlueMaterial;
+        private readonly WaitForSeconds _disableDelay = new(DisableDelay);
 
-        //private const float OutlineColorFactor = 0.85f;
-
-        private const float DisableDelay = 0.5f;
+        private const float DisableDelay = 0.8f;
 
         private void OnValidate()
         {
@@ -23,34 +19,25 @@ namespace StationDefense
                 _text = GetComponent<TMP_Text>();
         }
 
-        public void SetText(string text, ColorTeam team)
+        public void SetupAndDisableAfterDelay(string text, Color32 color, Material material)
         {
             _text.text = text;
-
-            Color32 color = TeamColorStorage.GetByTeam(team);
-            //Color32 outlineColor = Color32.Lerp(color, Color.black, OutlineColorFactor);
-
             _text.color = color;
-            _text.fontMaterial = GetMaterialByTeam(team);
+            _text.fontMaterial = material;
 
-            Invoke(nameof(Disable), DisableDelay);
+            StartCoroutine(DisableWithDelay());
+        }
+
+        private IEnumerator DisableWithDelay()
+        {
+            yield return _disableDelay;
+
+            Disable();
         }
 
         private void Disable()
         {
             PoolStorage.PutToPool(nameof(BubbleText), this);
-        }
-
-        private Material GetMaterialByTeam(ColorTeam team)
-        {
-            return team switch
-            {
-                ColorTeam.Red => _outlineRedMaterial,
-                ColorTeam.Yellow => _outlineYellowMaterial,
-                ColorTeam.Green => _outlineGreenMaterial,
-                ColorTeam.Blue => _outlineBlueMaterial,
-                _ => _outlineRedMaterial
-            };
         }
     }
 }

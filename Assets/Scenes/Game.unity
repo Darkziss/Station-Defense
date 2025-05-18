@@ -1815,7 +1815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetFrameRate: 60
-  _tweenCapacity: 15
+  _tweenCapacity: 50
   _inputHandler: {fileID: 826096186}
   _mainPresenter: {fileID: 1083956582}
   _deathHandler: {fileID: 603975970}

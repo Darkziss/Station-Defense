@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Pooling;
+using UnityRandom = UnityEngine.Random;
 
 namespace StationDefense
 {
@@ -13,6 +14,8 @@ namespace StationDefense
         [SerializeField] private Material _outlineGreenMaterial;
         [SerializeField] private Material _outlineBlueMaterial;
 
+        private const float maxXOffset = 1f;
+
         public void Init()
         {
             Enemy.EnemyHit += SpawnDamageTextAtPosition;
@@ -20,6 +23,9 @@ namespace StationDefense
 
         private void SpawnDamageTextAtPosition(Vector2 position, int damage, ColorTeam team)
         {
+            float xOffset = UnityRandom.Range(-maxXOffset, maxXOffset);
+            position.x += xOffset;
+            
             BubbleText instance = PoolStorage.GetFromPool(nameof(BubbleText), _bubbleTextPrefab, position,
                 Quaternion.identity);
 

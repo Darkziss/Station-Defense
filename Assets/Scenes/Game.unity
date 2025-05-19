@@ -2247,7 +2247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c128fdd8f9281ec4c95f0a1eadcda55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 519420031}
   _cameraAnimator: {fileID: 519420033}
   _shield: {fileID: 19242036}
 --- !u!1 &994509874
@@ -3682,6 +3681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bubbleTextPrefab: {fileID: 8953929903599068873, guid: 754dfd0cfee4e2b4bbe2b893022d9360, type: 3}
+  _outlineBlackMaterial: {fileID: 2100000, guid: 5e1059d39ba86294cbd53786fb9c6571, type: 2}
   _outlineRedMaterial: {fileID: 2100000, guid: 383b9e277cec48545ac23d3d503eeab2, type: 2}
   _outlineYellowMaterial: {fileID: 2100000, guid: 11ce9852c95e9cd4c8969df096a5b97e, type: 2}
   _outlineGreenMaterial: {fileID: 2100000, guid: ce1d633306dfade44ae846500ec044c0, type: 2}

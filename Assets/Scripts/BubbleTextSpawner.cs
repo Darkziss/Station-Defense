@@ -9,6 +9,8 @@ namespace StationDefense
     {
         [SerializeField] private BubbleText _bubbleTextPrefab;
 
+        [SerializeField] private Material _outlineBlackMaterial;
+
         [SerializeField] private Material _outlineRedMaterial;
         [SerializeField] private Material _outlineYellowMaterial;
         [SerializeField] private Material _outlineGreenMaterial;
@@ -44,6 +46,7 @@ namespace StationDefense
                 ColorTeam.Yellow => _outlineYellowMaterial,
                 ColorTeam.Green => _outlineGreenMaterial,
                 ColorTeam.Blue => _outlineBlueMaterial,
+                ColorTeam.None => _outlineBlackMaterial,
                 _ => throw new ArgumentOutOfRangeException(nameof(team))
             };
         }

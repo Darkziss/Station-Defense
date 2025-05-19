@@ -88,10 +88,14 @@ public abstract class Enemy : MonoBehaviour
         {
             CircularWave wave = collision.gameObject.GetComponent<CircularWave>();
 
-            _health.ChangeHealth(-wave.Damage);
+            int desiredDamage = wave.Damage;
+
+            _health.ChangeHealth(-desiredDamage);
 
             if (_health.IsHealthAtZero)
                 DisableWithAnimation();
+
+            EnemyHit?.Invoke(_transform.position, desiredDamage, ColorTeam.None);
         }
         else if (layer == _baseLayer)
         {

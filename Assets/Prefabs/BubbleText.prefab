@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 3745391652826939526, guid: addbddeb8e4ce1541b1632064fea5f8f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,8 +102,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: addbddeb8e4ce1541b1632064fea5f8f, type: 2}
+  m_sharedMaterial: {fileID: 3745391652826939526, guid: addbddeb8e4ce1541b1632064fea5f8f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -184,8 +184,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e752ec63954d21b4da850cc598454406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 1114271628668006489}
   _text: {fileID: 6686668115405569345}
-  _outlineRedMaterial: {fileID: 2100000, guid: 383b9e277cec48545ac23d3d503eeab2, type: 2}
-  _outlineYellowMaterial: {fileID: 2100000, guid: 11ce9852c95e9cd4c8969df096a5b97e, type: 2}
-  _outlineGreenMaterial: {fileID: 2100000, guid: ce1d633306dfade44ae846500ec044c0, type: 2}
-  _outlineBlueMaterial: {fileID: 2100000, guid: 98e6bf81656d468459e5709ccf5a120b, type: 2}

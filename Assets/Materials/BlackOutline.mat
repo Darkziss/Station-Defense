@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LiberationSansBlackOutline
-  m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-  m_Parent: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_Name: BlackOutline
+  m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  m_Parent: {fileID: 3745391652826939526, guid: addbddeb8e4ce1541b1632064fea5f8f, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - OUTLINE_ON
@@ -26,7 +26,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _FaceDilate: 0.5
+    - _FaceDilate: 0.3
     - _OutlineWidth: 0.2
     - _ScaleRatioA: 0.9
     - _ScaleRatioC: 0.28125

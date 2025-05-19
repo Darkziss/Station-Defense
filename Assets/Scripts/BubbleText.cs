@@ -11,17 +11,16 @@ namespace StationDefense
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private TMP_Text _text;
 
-        private readonly WaitForSeconds _disableDelay = new(FadeOutDelay);
-
-        private readonly TweenSettings _positionYAnimationSettings = new(PositionYDuration, 
+        private static readonly TweenSettings _positionYAnimationSettings = new(PositionYDuration, 
             ease: PositionYEase);
 
-        private readonly TweenSettings<float> _fadeOutSettings = new(0f, FadeOutDuration,
+        private static readonly TweenSettings<float> _fadeOutSettings = new(0f, FadeOutDuration,
             ease: FadeOutEase, startDelay: FadeOutDelay);
 
-        private float EndYPosition => _rectTransform.position.y + OffsetY;
+        private float EndYPosition => _rectTransform.position.y + Random.Range(MinYMove, MaxYMove);
 
-        private const float OffsetY = 0.3f;
+        private const float MinYMove = 0.1f;
+        private const float MaxYMove = 0.5f;
 
         private const float PositionYDuration = 0.3f;
         private const Ease PositionYEase = Ease.Linear;

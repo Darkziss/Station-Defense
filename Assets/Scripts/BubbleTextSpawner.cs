@@ -28,14 +28,14 @@ namespace StationDefense
             float xOffset = UnityRandom.Range(-maxXOffset, maxXOffset);
             position.x += xOffset;
             
-            BubbleText instance = PoolStorage.GetFromPool(nameof(BubbleText), _bubbleTextPrefab, position,
+            BubbleText bubbleTextInstance = PoolStorage.GetFromPool(nameof(BubbleText), _bubbleTextPrefab, position,
                 Quaternion.identity);
 
             string damageText = damage.ToString();
             Color32 color = TeamColorStorage.GetByTeam(team);
             Material material = GetMaterialByTeam(team);
 
-            instance.SetupAndDisableAfterDelay(damageText, color, material);
+            bubbleTextInstance.SetupAndDisableAfterDelay(damageText, color, material);
         }
 
         private Material GetMaterialByTeam(ColorTeam team)

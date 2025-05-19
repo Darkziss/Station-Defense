@@ -53,16 +53,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4163994734506605777, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163994734506605777, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163994734506605777, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4163994734506605777, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.g
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4163994734506605777, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_Mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6406746856109154134, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_Name
-      value: YellowCannonBase Variant
+      value: YellowCannonBase
       objectReference: {fileID: 0}
     - target: {fileID: 6444613932504132718, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_Color.b

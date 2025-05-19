@@ -4150,18 +4150,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3021841370279432281, guid: f85377408bda707448374eb07ed6c6c7, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 3021841370279432281, guid: f85377408bda707448374eb07ed6c6c7, type: 3}
-      propertyPath: _activatedColor.rgba
-      value: 4294903040
-      objectReference: {fileID: 0}
-    - target: {fileID: 3021841370279432281, guid: f85377408bda707448374eb07ed6c6c7, type: 3}
-      propertyPath: _deactivatedColor.rgba
-      value: 4287562496
-      objectReference: {fileID: 0}
     - target: {fileID: 8008089584036545459, guid: f85377408bda707448374eb07ed6c6c7, type: 3}
       propertyPath: m_Name
       value: BlueCannonBase
@@ -4230,18 +4218,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4498723306518498753, guid: d69a6424e9c480f4896f78fa7ad3b26e, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 4498723306518498753, guid: d69a6424e9c480f4896f78fa7ad3b26e, type: 3}
-      propertyPath: _activatedColor.rgba
-      value: 4278190335
-      objectReference: {fileID: 0}
-    - target: {fileID: 4498723306518498753, guid: d69a6424e9c480f4896f78fa7ad3b26e, type: 3}
-      propertyPath: _deactivatedColor.rgba
-      value: 4278190223
-      objectReference: {fileID: 0}
     - target: {fileID: 8692900248619228715, guid: d69a6424e9c480f4896f78fa7ad3b26e, type: 3}
       propertyPath: m_Name
       value: RedCannonBase
@@ -4259,18 +4235,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1838563398}
     m_Modifications:
-    - target: {fileID: 1898264109211331182, guid: 086b0e01908907346a49bc483048495e, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 1898264109211331182, guid: 086b0e01908907346a49bc483048495e, type: 3}
-      propertyPath: _activatedColor.rgba
-      value: 4278255103
-      objectReference: {fileID: 0}
-    - target: {fileID: 1898264109211331182, guid: 086b0e01908907346a49bc483048495e, type: 3}
-      propertyPath: _deactivatedColor.rgba
-      value: 4278226575
-      objectReference: {fileID: 0}
     - target: {fileID: 4420602077888392200, guid: 086b0e01908907346a49bc483048495e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4378,18 +4342,6 @@ PrefabInstance:
     - target: {fileID: 1111137043846420095, guid: 14ec5bb8c387f9e49bedbec8bcbf317d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910823222241939481, guid: 14ec5bb8c387f9e49bedbec8bcbf317d, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 2910823222241939481, guid: 14ec5bb8c387f9e49bedbec8bcbf317d, type: 3}
-      propertyPath: _activatedColor.rgba
-      value: 4278255392
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910823222241939481, guid: 14ec5bb8c387f9e49bedbec8bcbf317d, type: 3}
-      propertyPath: _deactivatedColor.rgba
-      value: 4278226706
       objectReference: {fileID: 0}
     - target: {fileID: 7973796826264667123, guid: 14ec5bb8c387f9e49bedbec8bcbf317d, type: 3}
       propertyPath: m_Name

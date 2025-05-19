@@ -28,8 +28,8 @@ namespace StationDefense
             float xOffset = UnityRandom.Range(-maxXOffset, maxXOffset);
             position.x += xOffset;
             
-            BubbleText bubbleTextInstance = PoolStorage.GetFromPool(nameof(BubbleText), _bubbleTextPrefab, position,
-                Quaternion.identity);
+            BubbleText bubbleTextInstance = PoolStorage.GetFromPool(nameof(BubbleText), _bubbleTextPrefab, 
+                position, Quaternion.identity);
 
             string damageText = damage.ToString();
             Color32 color = TeamColorStorage.GetByTeam(team);

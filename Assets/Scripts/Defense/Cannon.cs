@@ -22,6 +22,7 @@ namespace StationDefense
         [SerializeField] private ColorTeam _team;
 
         private Color32 _activatedColor;
+        private Color32 _deactivatedColor;
 
         private Camera _camera;
 
@@ -33,8 +34,6 @@ namespace StationDefense
         private InputAction _powerfulShootAction;
 
         public bool IsActive { get; private set; } = false;
-
-        private Color32 DeactivatedColor => Color.Lerp(_activatedColor, Color.black, DeactivatedColorLerp);
 
         private const float DeactivatedColorLerp = 0.5f;
 
@@ -50,8 +49,9 @@ namespace StationDefense
         private void Start()
         {
             _activatedColor = TeamColorStorage.GetByTeam(_team);
+            _deactivatedColor = Color32.Lerp(_activatedColor, Color.black, DeactivatedColorLerp);
             
-            _baseSpriteRenderer.color = DeactivatedColor;
+            _baseSpriteRenderer.color = _deactivatedColor;
 
             _laserSightLineRenderer.enabled = false;
             
@@ -119,7 +119,7 @@ namespace StationDefense
         {
             IsActive = false;
 
-            _baseSpriteRenderer.color = DeactivatedColor;
+            _baseSpriteRenderer.color = _deactivatedColor;
 
             _laserSightLineRenderer.enabled = false;
 

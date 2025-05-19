@@ -82,7 +82,7 @@ public abstract class Enemy : MonoBehaviour
             else
                 _enemyAnimator.PlayDamageAnimation();
 
-            EnemyHit?.Invoke(_transform.position, desiredDamage, Team);
+            EnemyHit?.Invoke(_transform.position, desiredDamage, ball.Team);
         }
         else if (layer == _circularWaveLayer)
         {

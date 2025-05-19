@@ -87,10 +87,6 @@ namespace StationDefense
 
                 _cameraAnimator.MoveToPositionWithAnimation(_cannonBases[key].position);
             }
-
-            // TODO: REMOVE
-            if (!HaveSelectedCannon)
-                return;
         }
 
         public void ResetAll()

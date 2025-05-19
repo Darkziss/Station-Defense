@@ -23,9 +23,6 @@ namespace StationDefense
 
         private Color32 _activatedColor;
 
-        // TODO: Remove
-        private Transform _transform;
-
         private Camera _camera;
 
         private CannonAnimator _cannonAnimator;
@@ -43,9 +40,6 @@ namespace StationDefense
 
         private void OnValidate()
         {
-            if (_transform == null)
-                _transform = transform;
-
             if (_camera == null)
                 _camera = Camera.main;
 

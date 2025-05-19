@@ -6,7 +6,7 @@ namespace StationDefense.IMGUI
     {
         [SerializeField] private EnemySpawner _enemySpawner;
 
-        private bool _shouldDisplayWindow = true;
+        private bool _shouldDisplayWindow = false;
 
         private readonly Rect _windowRect = new(15f, 15f, 420, 200);
 

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using StationDefense.InputSystem;
-using PrimeTween;
 
 namespace StationDefense
 {
     public class CannonSelector : MonoBehaviour
     {
-        [SerializeField] private Camera _camera;
+        [SerializeField] private CameraAnimator _cameraAnimator;
 
         [SerializeField] private Shield _shield;
         
@@ -25,8 +24,6 @@ namespace StationDefense
         private readonly Dictionary<Vector2Int, ColorTeam> _teams = new(cannonCount);
 
         private readonly Vector2Int _defaultSelectedKey = Vector2Int.zero;
-
-        private readonly TweenSettings _cameraTweenSettings = new(0.5f, Ease.OutCubic);
 
         public ColorTeam SelectedTeam => _teams[_selectedKey];
 
@@ -45,7 +42,7 @@ namespace StationDefense
                 Vector2Int.right,
                 Vector2Int.down
             };
-
+            
             for (int i = 0; i < cannonCount; i++)
             {
                 _cannons.Add(keys[i], cannons[i]);
@@ -88,9 +85,10 @@ namespace StationDefense
 
                 _shield.ChangeDefenseTeam(_teams[key]);
 
-                MoveCameraToPosition(_cannonBases[key].position, true);
+                _cameraAnimator.MoveToPositionWithAnimation(_cannonBases[key].position);
             }
 
+            // TODO: REMOVE
             if (!HaveSelectedCannon)
                 return;
         }
@@ -105,7 +103,7 @@ namespace StationDefense
 
             _shield.ChangeDefenseTeam(ColorTeam.None);
 
-            MoveCameraToPosition(Vector2.zero, false);
+            _cameraAnimator.MoveToPositionWithoutAnimation(Vector3.zero);
         }
 
         private void ResetCannonSelection()
@@ -117,7 +115,7 @@ namespace StationDefense
 
             _shield.ChangeDefenseTeam(ColorTeam.None);
 
-            MoveCameraToPosition(Vector2.zero, true);
+            _cameraAnimator.MoveToPositionWithAnimation(Vector3.zero);
         }
 
         private Vector2Int InputToKey(Vector2 input)
@@ -132,17 +130,6 @@ namespace StationDefense
                 return Vector2Int.down;
             else
                 return Vector2Int.zero;
-        }
-
-        private void MoveCameraToPosition(Vector2 position, bool animate)
-        {
-            float cameraZPosition = _camera.transform.position.z;
-            Vector3 endPosition = new(position.x, position.y, cameraZPosition);
-
-            if (animate)
-                Tween.Position(_camera.transform, endPosition, _cameraTweenSettings);
-            else
-                _camera.transform.position = endPosition;
         }
     }
 }

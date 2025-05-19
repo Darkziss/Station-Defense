@@ -4218,18 +4218,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1838400810795072940, guid: d69a6424e9c480f4896f78fa7ad3b26e, type: 3}
-      propertyPath: m_Parameters.colorGradient.atime2
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1838400810795072940, guid: d69a6424e9c480f4896f78fa7ad3b26e, type: 3}
-      propertyPath: m_Parameters.colorGradient.key2.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1838400810795072940, guid: d69a6424e9c480f4896f78fa7ad3b26e, type: 3}
-      propertyPath: m_Parameters.colorGradient.m_ColorSpace
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 8692900248619228715, guid: d69a6424e9c480f4896f78fa7ad3b26e, type: 3}
       propertyPath: m_Name
       value: RedCannonBase

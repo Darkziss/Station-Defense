@@ -14,14 +14,16 @@ namespace StationDefense
         [SerializeField] private CannonShooter _baseShooter;
         [SerializeField] private CannonShooter _powerfulShooter;
 
+        [SerializeField] private LineRenderer _laserSightLineRenderer;
+
         [SerializeField] private float _baseShootDelay = 0.1f;
         [SerializeField] private float _powerfulShootDelay = 1.5f;
 
         [SerializeField] private ColorTeam _team;
 
-        [SerializeField] private Color32 _deactivatedColor;
-        [SerializeField] private Color32 _activatedColor;
+        private Color32 _activatedColor;
 
+        // TODO: Remove
         private Transform _transform;
 
         private Camera _camera;
@@ -34,6 +36,10 @@ namespace StationDefense
         private InputAction _powerfulShootAction;
 
         public bool IsActive { get; private set; } = false;
+
+        private Color32 DeactivatedColor => Color.Lerp(_activatedColor, Color.black, DeactivatedColorLerp);
+
+        private const float DeactivatedColorLerp = 0.5f;
 
         private void OnValidate()
         {
@@ -49,7 +55,11 @@ namespace StationDefense
 
         private void Start()
         {
-            _baseSpriteRenderer.color = _deactivatedColor;
+            _activatedColor = TeamColorStorage.GetByTeam(_team);
+            
+            _baseSpriteRenderer.color = DeactivatedColor;
+
+            _laserSightLineRenderer.enabled = false;
             
             _lookAction = InputHandler.LookAction;
             
@@ -102,6 +112,8 @@ namespace StationDefense
 
             _baseSpriteRenderer.color = _activatedColor;
 
+            _laserSightLineRenderer.enabled = true;
+
             if (_shootAction.IsPressed())
                 _baseShooter.StartShooting(_team);
 
@@ -113,7 +125,9 @@ namespace StationDefense
         {
             IsActive = false;
 
-            _baseSpriteRenderer.color = _deactivatedColor;
+            _baseSpriteRenderer.color = DeactivatedColor;
+
+            _laserSightLineRenderer.enabled = false;
 
             if (_baseShooter.IsShooting)
                 _baseShooter.StopShooting();

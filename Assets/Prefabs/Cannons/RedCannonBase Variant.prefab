@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2172030147197684924, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: _activatedColor.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
     - target: {fileID: 4119182755519417050, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -59,6 +63,10 @@ PrefabInstance:
     - target: {fileID: 6444613932504132718, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_Color.g
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444613932504132718, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

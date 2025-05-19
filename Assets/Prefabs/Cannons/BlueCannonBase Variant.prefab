@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: _team
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2172030147197684924, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: _activatedColor.rgba
+      value: 4294903296
+      objectReference: {fileID: 0}
     - target: {fileID: 4119182755519417050, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -52,13 +56,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4163994734506605777, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163994734506605777, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163994734506605777, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163994734506605777, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6406746856109154134, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_Name
       value: BlueCannonBase Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6444613932504132718, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6444613932504132718, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_Color.g
-      value: 0.011764706
+      value: 0.010489464
       objectReference: {fileID: 0}
     - target: {fileID: 6444613932504132718, guid: cee77c8fe08454b4f80967177a317f8a, type: 3}
       propertyPath: m_Color.r
